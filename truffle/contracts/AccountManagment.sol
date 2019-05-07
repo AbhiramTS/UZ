@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-import "./permission.sol";
+import "./Permission.sol";
 
 contract AccountManagment is Permission{
     struct myNode{
