@@ -43,5 +43,5 @@ contract AccountManagment {
     function newArticle(address _artid, string memory _aHash, string memory _link, address _auth, address _pub, string memory _tmstamp) public{
         art[_artid] = article({artHash: _aHash, author: _auth, publisher: _pub, link: _link, timestamp: _tmstamp });
     }
-    
+
 }
