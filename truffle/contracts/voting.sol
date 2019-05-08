@@ -12,10 +12,11 @@ contract voting{
     function voteArticle(bool _up, address payable _artAddress) public payable{
         if(_up){
             artVotes[_artAddress].push(votes(msg.sender, true));
-            _artAddress.transfer(msg.value);
+            _artAddress.transfer(msg.value);//this transfers msg.value from msg.sender to article
         }
         else{
             artVotes[_artAddress].push(votes(msg.sender, false));
+            //what do we do here?
         }
     }
     
