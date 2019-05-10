@@ -21,6 +21,7 @@ contract voting is AccountManagment{
             artVotes[_artAddress].push(votes(msg.sender, false));
             msg.sender.transfer(msg.value);
             art[_artAddress].dVote += 1;
+            aRanking(_artAddress, msg.sender);
             //(art[_artAddress].aRank != 0)? art[_artAddress].aRank -= 1 : art[_artAddress].aRank = 0;
         }
     }
@@ -29,13 +30,15 @@ contract voting is AccountManagment{
         return artVotes[_addr][_index].v;
     }
 
-    function aRanking(address _artAddress) public{
+    function aRanking(address _artAddress, address _voter) public{
         uint tVotes = art[_artAddress].uVote + art[_artAddress].dVote;
+        uint voterWeight = (usr[_voter].uRank * 25) / 100;
         if(art[_artAddress].uVote > art[_artAddress].dVote){
-            art[_artAddress].aRank += (tVotes/(art[_artAddress].uVote - art[_artAddress].dVote)) / 10;
+            art[_artAddress].aRank += ((((art[_artAddress].uVote - art[_artAddress].dVote) * 25) / 100) + voterWeight + (tVotes * 50) / 100) / 10;
+            //some crazy ranking method
         }
         else{
-            art[_artAddress].aRank -= (tVotes/(art[_artAddress].dVote + art[_artAddress].uVote)) / 10;
+            art[_artAddress].aRank -= ((((art[_artAddress].uVote - art[_artAddress].dVote) * 25) / 100) + voterWeight + (tVotes * 50) / 100) / 10;
         }
     }
 
