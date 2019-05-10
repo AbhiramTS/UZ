@@ -29,19 +29,23 @@ contract AccountManagment is Permission{
         string link;
         string timestamp;
         uint aRank;
+        uint uVote;
+        uint dVote;
     }
     mapping (address => myArticle) public art;
     function newUser(address _uid, string memory _name, string memory _email) public onlyNode {
-        usr[_uid] = myUser({name: _name, email : _email, numPublisher : 0, uRank : 1});
+        usr[_uid] = myUser({name: _name, email : _email, numPublisher : 0, uRank : 100});
         addUser(_uid);
     }
     function newPublisher(address _pid, string memory _name, string memory _webAddr) public{
-        pub[_pid] = myPublisher({name: _name, webAddress : _webAddr, pRank : 1});
+        pub[_pid] = myPublisher({name: _name, webAddress : _webAddr, pRank : 100});
         addPublisher(_pid);
     }
     function newArticle(address _artid, string memory _aHash, string memory _link,
-                            address _auth, address _pub, string memory _tmstamp) public onlyUser{
-        art[_artid] = myArticle({artHash: _aHash, author: _auth, publisher: _pub, link: _link, timestamp: _tmstamp, aRank : 1});
-        addArticle(_artid);
-    }
+        address _auth, address _pub, string memory _tmstamp) public onlyUser
+        {
+                art[_artid] = myArticle({artHash: _aHash, author: _auth, publisher: _pub,
+                    link: _link, timestamp: _tmstamp, aRank : 100, uVote : 0, dVote : 0});
+            addArticle(_artid);
+        }
 }

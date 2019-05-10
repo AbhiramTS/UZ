@@ -15,17 +15,28 @@ contract voting is AccountManagment{
         if(_up){
             artVotes[_artAddress].push(votes(msg.sender, true));
             _artAddress.transfer(msg.value);
-            art[_artAddress].aRank += 1;
+            art[_artAddress].uVote += 1;
         }
         else{
             artVotes[_artAddress].push(votes(msg.sender, false));
             msg.sender.transfer(msg.value);
-            (art[_artAddress].aRank != 0)? art[_artAddress].aRank -= 1 : art[_artAddress].aRank = 0;
+            art[_artAddress].dVote += 1;
+            //(art[_artAddress].aRank != 0)? art[_artAddress].aRank -= 1 : art[_artAddress].aRank = 0;
         }
     }
     
     function getVote(uint _index, address _addr)public view returns(bool){
         return artVotes[_addr][_index].v;
+    }
+
+    function aRanking(address _artAddress) public{
+        uint tVotes = art[_artAddress].uVote + art[_artAddress].dVote;
+        if(art[_artAddress].uVote > art[_artAddress].dVote){
+            art[_artAddress].aRank += (tVotes/(art[_artAddress].uVote - art[_artAddress].dVote)) / 10;
+        }
+        else{
+            art[_artAddress].aRank -= (tVotes/(art[_artAddress].dVote + art[_artAddress].uVote)) / 10;
+        }
     }
 
 }
