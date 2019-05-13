@@ -1,0 +1,18 @@
+{
+    "difficulty": "0x400",
+    "alloc": {
+        "7f7fbf5c48f80589829579998f2b6579dc01ef0e": {
+            "balance": "0xAD78EBC5AC6200000"
+        },
+        "d09b1ce54b9b50ee87d4b68c8d79f047124c5780": {
+            "balance": "0xAD78EBC5AC6200000"
+        },
+        "c6fe0f1a5b7c762ea66beb41e874e64803c04fa8": {
+            "balance": "0xAD78EBC5AC6200000"
+        }
+    },
+    "gasLimit": "0xfffffffffffff",
+    "config": {
+        "chainId": 4002
+    }
+}
