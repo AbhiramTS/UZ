@@ -25,7 +25,6 @@ contract voting is AccountManagment{
             //(art[_artAddress].aRank != 0)? art[_artAddress].aRank -= 1 : art[_artAddress].aRank = 0;
         }
     }
-    
     function getVote(uint _index, address _addr)public view returns(bool){
         return artVotes[_addr][_index].v;
     }
