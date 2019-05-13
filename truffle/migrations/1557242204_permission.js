@@ -1,5 +1,5 @@
-// const Permission = artifacts.require("Permission");
+const Permission = artifacts.require("Permission");
 
-// module.exports = function(deployer) {
-//   deployer.deploy(Permission);
-// };
+module.exports = function(deployer) {
+  deployer.deploy(Permission);
+};

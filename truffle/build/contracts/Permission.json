@@ -13,7 +13,8 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "function",
+      "signature": "0x9d95f1cc"
     },
     {
       "constant": false,
@@ -27,7 +28,8 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "function",
+      "signature": "0x763f323d"
     },
     {
       "constant": false,
@@ -41,7 +43,8 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "function",
+      "signature": "0xfc694562"
     },
     {
       "constant": false,
@@ -55,7 +58,8 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "function",
+      "signature": "0x421b2d8b"
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.5.0+commit.1d4f565a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"_temp\",\"type\":\"address\"}],\"name\":\"addUser\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_temp\",\"type\":\"address\"}],\"name\":\"addPublisher\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_temp\",\"type\":\"address\"}],\"name\":\"addNode\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_temp\",\"type\":\"address\"}],\"name\":\"addArticle\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/abhiram/Documents/UZ/truffle/contracts/Permission.sol\":\"Permission\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/abhiram/Documents/UZ/truffle/contracts/Permission.sol\":{\"keccak256\":\"0x2906d61884ef970b029b68a53afb4df64d738d023b34c8637f3505c689167815\",\"urls\":[\"bzzr://f55ad9597f09247da30ab88cd9eff09135f5366b250651c80e95c3d26e75fa84\"]}},\"version\":1}",
@@ -4327,9 +4331,22 @@
     "name": "solc",
     "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "4002": {
+      "events": {},
+      "links": {},
+      "address": "0xed110B0c5bF84217c26053501Ff82AFcbFB59cad",
+      "transactionHash": "0x15e2f0a410e4943330a35a3aab8f52e0836e40c94e9c9978c089fe8664f31f7e"
+    },
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x6BE7F27a3E63826285F76d585223aFB6E0ED6B7e",
+      "transactionHash": "0xc15655825644c6ccd36acdbe665699bbcb2c9fc1125dae123ee93dadb48e81e1"
+    }
+  },
   "schemaVersion": "3.0.6",
-  "updatedAt": "2019-05-07T15:20:45.895Z",
+  "updatedAt": "2019-05-08T17:01:37.812Z",
   "devdoc": {
     "methods": {}
   },

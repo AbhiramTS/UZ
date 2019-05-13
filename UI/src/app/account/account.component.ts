@@ -10,11 +10,19 @@ export class AccountComponent implements OnInit {
 
   accounts: String[];
 
-  constructor(private web3Service : Web3ServiceService) { }
+  constructor(private web3Service : Web3ServiceService) {
+    console.info(web3Service);
+   }
 
   ngOnInit() {
-    this.web3Service.getAccounts();
-    this.accounts = this.web3Service.myAccounts;
+    console.info(this.web3Service);    
+    this.getAccount();
+  }
+
+  getAccount = () => {
+  this.web3Service.myAccountsObservable.subscribe((accounts) =>{
+    this.accounts = accounts;
+  });  
   }
 
   

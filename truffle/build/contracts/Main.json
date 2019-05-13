@@ -33,7 +33,8 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "function",
+      "signature": "0x18fd9763"
     },
     {
       "constant": false,
@@ -47,7 +48,8 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "function",
+      "signature": "0x421b2d8b"
     },
     {
       "constant": false,
@@ -69,7 +71,8 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "function",
+      "signature": "0x4a746d05"
     },
     {
       "constant": false,
@@ -83,7 +86,8 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "function",
+      "signature": "0x763f323d"
     },
     {
       "constant": false,
@@ -97,7 +101,8 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "function",
+      "signature": "0x9d95f1cc"
     },
     {
       "constant": false,
@@ -119,7 +124,8 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "function",
+      "signature": "0xed82c04e"
     },
     {
       "constant": false,
@@ -133,7 +139,8 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "function",
+      "signature": "0xfc694562"
     },
     {
       "inputs": [
@@ -148,7 +155,8 @@
       ],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "constructor"
+      "type": "constructor",
+      "signature": "constructor"
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.5.0+commit.1d4f565a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"_artid\",\"type\":\"address\"},{\"name\":\"_aHash\",\"type\":\"string\"},{\"name\":\"_link\",\"type\":\"string\"},{\"name\":\"_auth\",\"type\":\"address\"},{\"name\":\"_pub\",\"type\":\"address\"},{\"name\":\"_tmstamp\",\"type\":\"string\"}],\"name\":\"newArticle\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_temp\",\"type\":\"address\"}],\"name\":\"addUser\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_uid\",\"type\":\"address\"},{\"name\":\"_name\",\"type\":\"string\"},{\"name\":\"_email\",\"type\":\"string\"}],\"name\":\"newUser\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_temp\",\"type\":\"address\"}],\"name\":\"addPublisher\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_temp\",\"type\":\"address\"}],\"name\":\"addNode\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_pid\",\"type\":\"address\"},{\"name\":\"_name\",\"type\":\"string\"},{\"name\":\"_webAddr\",\"type\":\"string\"}],\"name\":\"newPublisher\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_temp\",\"type\":\"address\"}],\"name\":\"addArticle\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"_name\",\"type\":\"string\"},{\"name\":\"_email\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/abhiram/Documents/UZ/truffle/contracts/Main.sol\":\"Main\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/abhiram/Documents/UZ/truffle/contracts/AccountManagment.sol\":{\"keccak256\":\"0xa9c6b8d08ec92833be96f415c1e60880173b730bf502b6e4d33c2d1dd0a14544\",\"urls\":[\"bzzr://aba2865150deee507037bf584c9a3e7598e712b759ed459545d8745810aa30bb\"]},\"/home/abhiram/Documents/UZ/truffle/contracts/Main.sol\":{\"keccak256\":\"0x14ff1eb672cf0740048706ff4bb0e38b75bcb592b80fe65296578f4e71065f2c\",\"urls\":[\"bzzr://5993a7c561e25e40d784d137000ee0ce2fbf761fad1d0df2bb26592575e80bde\"]},\"/home/abhiram/Documents/UZ/truffle/contracts/Permission.sol\":{\"keccak256\":\"0x2906d61884ef970b029b68a53afb4df64d738d023b34c8637f3505c689167815\",\"urls\":[\"bzzr://f55ad9597f09247da30ab88cd9eff09135f5366b250651c80e95c3d26e75fa84\"]}},\"version\":1}",
@@ -882,9 +890,22 @@
     "name": "solc",
     "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "4002": {
+      "events": {},
+      "links": {},
+      "address": "0x1e9A4da58aBc22a57773935933c7afaD928a9dc0",
+      "transactionHash": "0x64cadce3311def3dc884f0896171c640591adf86203aad88de7894190f72c614"
+    },
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x1c47F65d921ED9C74C51E3ADa49C2069538e5183",
+      "transactionHash": "0xde6bff0b683c283de8136d342c678077a7ffb1adbbbc0ee76551d41eae2c5f85"
+    }
+  },
   "schemaVersion": "3.0.6",
-  "updatedAt": "2019-05-07T15:20:45.889Z",
+  "updatedAt": "2019-05-08T17:01:42.240Z",
   "devdoc": {
     "methods": {}
   },
