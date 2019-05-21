@@ -12,19 +12,55 @@ contract voting is AccountManagment{
     mapping (address => votes[]) public artVotes;
 
     function voteArticle(bool _up, address payable _artAddress) public payable{
+        bool found;
         if(_up){
-            artVotes[_artAddress].push(votes(msg.sender, true));
-            _artAddress.transfer(msg.value);
-            art[_artAddress].uVote += 1;
+            for(uint i = 0; i < artVotes[_artAddress].length; i++)
+            {
+                if(artVotes[_artAddress][i].adr == msg.sender){
+                    found = true;
+                    if(artVotes[_artAddress][i].v == true){
+                        delete (artVotes[_artAddress])[i];
+                        art[_artAddress].uVote -= 1;
+                    }
+                    else{
+                        artVotes[_artAddress][i].v = true;
+                        art[_artAddress].uVote += 1;
+                        art[_artAddress].dVote -= 1;
+                    }
+                }
+            }
+            if(!found){
+                artVotes[_artAddress].push(votes(msg.sender, true));
+                //_artAddress.transfer(msg.value);
+                art[_artAddress].uVote += 1;
+            }
         }
         else{
-            artVotes[_artAddress].push(votes(msg.sender, false));
-            msg.sender.transfer(msg.value);
-            art[_artAddress].dVote += 1;
-            aRanking(_artAddress, msg.sender);
-            //(art[_artAddress].aRank != 0)? art[_artAddress].aRank -= 1 : art[_artAddress].aRank = 0;
+            for(uint i = 0; i < artVotes[_artAddress].length; i++)
+            {
+                if(artVotes[_artAddress][i].adr == msg.sender){
+                    found = true;
+                    if(artVotes[_artAddress][i].v == false){
+                        delete (artVotes[_artAddress])[i];
+                        art[_artAddress].dVote -= 1;
+                    }
+                    else{
+                        artVotes[_artAddress][i].v = false;
+                        art[_artAddress].uVote -= 1;
+                        art[_artAddress].dVote += 1;
+                    }
+                }
+            }
+            if(!found){
+                artVotes[_artAddress].push(votes(msg.sender, false));
+                //msg.sender.transfer(msg.value);
+                art[_artAddress].dVote += 1;
+                aRanking(_artAddress, msg.sender);
+                //(art[_artAddress].aRank != 0)? art[_artAddress].aRank -= 1 : art[_artAddress].aRank = 0;
+            }
         }
     }
+    
     function getVote(uint _index, address _addr)public view returns(bool){
         return artVotes[_addr][_index].v;
     }
