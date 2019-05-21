@@ -59,3 +59,15 @@
 14:44:31.649137 db@open done T·123.461179ms
 14:57:38.153487 db@close closing
 14:57:38.153679 db@close done T·187.225µs
+=============== May 13, 2019 (IST) ===============
+16:35:57.160551 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:35:57.160692 version@stat F·[1 1] S·46KiB[241B 46KiB] Sc·[0.25 0.00]
+16:35:57.160704 db@open opening
+16:35:57.160743 journal@recovery F·1
+16:35:57.162894 journal@recovery recovering @13
+16:35:57.198234 memdb@flush created L0@15 N·2 S·241B "Dat..ion,v908":"Las..der,v909"
+16:35:57.206769 version@stat F·[2 1] S·47KiB[482B 46KiB] Sc·[0.50 0.00]
+16:35:57.311081 db@janitor F·5 G·0
+16:35:57.311133 db@open done T·150.408594ms
+16:38:26.464988 db@close closing
+16:38:26.465189 db@close done T·277.069µs
