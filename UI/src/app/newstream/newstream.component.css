@@ -1,0 +1,28 @@
+.streamCntnr{
+    width: 94vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.strmItmCntnr{
+    width: 27vw;
+    margin: 2em 2vw 2em 2vw;
+    display: inline-block;
+}
+
+.strmImgCntnr{
+    width: 27vw;
+    overflow: hidden;
+}
+
+.strmImg{
+    height: 100%;
+    width: 100%;
+}
+
+.strmTxtCntnr{
+    height: 150px;
+    width: 100%;
+    margin: 1em 0 1em 0;
+    overflow: hidden;
+}

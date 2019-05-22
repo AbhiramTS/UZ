@@ -9,6 +9,7 @@ import {Web3ServiceService} from './services/web3-service.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
+import { NewstreamComponent } from './newstream/newstream.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { LoginComponent } from './login/login.component';
     AccountComponent,
     NavbarComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    NewstreamComponent
   ],
   imports: [
     BrowserModule,
