@@ -11,4 +11,5 @@ a{
 
 body{
     background: #dee9f1 !important;
+    overflow-y: scroll;
 }

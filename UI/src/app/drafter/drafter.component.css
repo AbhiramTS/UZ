@@ -1,10 +1,13 @@
-
+.draftCntnr{
+    margin-top: 50px;
+}
 
 .artPreviewCntnr{
     width: 90vw;
     height: 70vh;
     background: aliceblue;
     border: #007bff 4px dashed;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
 }
