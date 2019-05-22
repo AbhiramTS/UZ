@@ -36,7 +36,7 @@ export class Web3ServiceService {
       console.warn("Couldn't connect to any web3 provider!!!")
       return;
     }
-    setInterval(() => this.getAccounts(), 200);
+    setTimeout(() => this.getAccounts(), 200); // changed to timeout as it was refreshing every 0.2 sec
   };
 
    getAccounts = () => {

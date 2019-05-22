@@ -6,11 +6,17 @@ import { AppComponent } from './app.component';
 import { AccountComponent } from './account/account.component';
 
 import {Web3ServiceService} from './services/web3-service.service';
+import { NavbarComponent } from './navbar/navbar.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AccountComponent
+    AccountComponent,
+    NavbarComponent,
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
