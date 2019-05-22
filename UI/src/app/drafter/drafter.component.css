@@ -1,0 +1,10 @@
+
+
+.artPreviewCntnr{
+    width: 90vw;
+    height: 70vh;
+    background: aliceblue;
+    border: #007bff 4px dashed;
+    margin-left: auto;
+    margin-right: auto;
+}

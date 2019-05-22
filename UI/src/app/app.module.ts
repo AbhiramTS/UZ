@@ -10,6 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { NewstreamComponent } from './newstream/newstream.component';
+import { DrafterComponent } from './drafter/drafter.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NewstreamComponent } from './newstream/newstream.component';
     NavbarComponent,
     RegistrationComponent,
     LoginComponent,
-    NewstreamComponent
+    NewstreamComponent,
+    DrafterComponent
   ],
   imports: [
     BrowserModule,

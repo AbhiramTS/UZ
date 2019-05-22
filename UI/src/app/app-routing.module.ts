@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { RegistrationComponent } from './registration/registration.component'
 import { LoginComponent } from './login/login.component'
 import { NewstreamComponent } from './newstream/newstream.component'
+import { DrafterComponent } from './drafter/drafter.component'
 
 const routes: Routes = [
   {path : "", component: NewstreamComponent },
   {path: "register", component: RegistrationComponent },
-  {path: "login", component: LoginComponent }
+  {path: "login", component: LoginComponent },
+  {path: "newArticle", component: DrafterComponent }
 ];
 
 @NgModule({
