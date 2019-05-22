@@ -11,12 +11,14 @@ contract AccountManagment is Permission{
         string name;
         string email;
         uint numPublisher;
-        mapping (uint => address) myPublishers;
+        uint uRank;
+        //mapping (uint => address) myPublishers;
     }
     mapping (address => myUser) usr;
     struct myPublisher{
         string name;
         string webAddress;
+        uint pRank;
         mapping (address => bool) myAuthors;
     }
     mapping(address => myPublisher) pub;
@@ -26,19 +28,24 @@ contract AccountManagment is Permission{
         address publisher;
         string link;
         string timestamp;
+        uint aRank;
+        uint uVote;
+        uint dVote;
     }
-    mapping (address => myArticle) art;
+    mapping (address => myArticle) public art;
     function newUser(address _uid, string memory _name, string memory _email) public onlyNode {
-        usr[_uid] = myUser({name: _name, email : _email, numPublisher : 0});
+        usr[_uid] = myUser({name: _name, email : _email, numPublisher : 0, uRank : 100});
         addUser(_uid);
     }
     function newPublisher(address _pid, string memory _name, string memory _webAddr) public{
-        pub[_pid] = myPublisher({name: _name, webAddress : _webAddr});
+        pub[_pid] = myPublisher({name: _name, webAddress : _webAddr, pRank : 100});
         addPublisher(_pid);
     }
     function newArticle(address _artid, string memory _aHash, string memory _link,
-                            address _auth, address _pub, string memory _tmstamp) public onlyUser{
-        art[_artid] = myArticle({artHash: _aHash, author: _auth, publisher: _pub, link: _link, timestamp: _tmstamp });
-        addArticle(_artid);
-    }
+        address _auth, address _pub, string memory _tmstamp) public onlyUser
+        {
+                art[_artid] = myArticle({artHash: _aHash, author: _auth, publisher: _pub,
+                    link: _link, timestamp: _tmstamp, aRank : 100, uVote : 0, dVote : 0});
+            addArticle(_artid);
+        }
 }
