@@ -2,13 +2,16 @@ const tmplt = require('./templating');
 const fastify = require('fastify')({ logger: true });
 const url = require('url');
 
+fastify.register(require('fastify-cors'), { 
+    // put your options here
+    origin:"*"
+  });
 
 fastify.get('/url', async (request, reply) => {
     const urlParts = url.parse(request.req.url, true);
     const params = urlParts.query;
     const link = params.link;
     const ct = await tmplt(link);
-    console.log("ct => ", ct);
     const page = `
     <!DOCTYPE html>
     <html>
