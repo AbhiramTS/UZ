@@ -10,13 +10,10 @@ import {Web3ServiceService} from './services/web3-service.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
-<<<<<<< HEAD
 import { NewstreamComponent } from './newstream/newstream.component';
 import { DrafterComponent } from './drafter/drafter.component';
-=======
 import { TemplatingComponent } from './templating/templating.component';
 import { SafePipe } from './safe.pipe';
->>>>>>> templating
 
 @NgModule({
   declarations: [
@@ -25,13 +22,10 @@ import { SafePipe } from './safe.pipe';
     NavbarComponent,
     RegistrationComponent,
     LoginComponent,
-<<<<<<< HEAD
     NewstreamComponent,
-    DrafterComponent
-=======
+    DrafterComponent,
     TemplatingComponent,
     SafePipe
->>>>>>> templating
   ],
   imports: [
     BrowserModule,

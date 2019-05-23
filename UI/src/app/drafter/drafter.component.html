@@ -1,6 +1,7 @@
 <div class="container draftCntnr">
     <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Enter the URL to the article:" aria-label="Enter the URL to the article:" aria-describedby="artLink">
+      <input type="text" class="form-control" placeholder="Enter the URL to the article:" aria-label="Enter the URL to the article:" #artLink
+      (input)="getPreview(artLink.value)">
       <div class="input-group-append">
         <button class="btn btn-success" type="button" id="artLink">Publish</button>
       </div>
@@ -9,11 +10,10 @@
 
 <br>
 
-<div class="artPreviewCntnr">
+<div class="artPreviewCntnr" [innerHtml]="myTmplt | safe : 'html'">
 
   <div class="draftPrvwPlaceholder">
     Article Preview Appears Here
   </div>
 
 </div>
-<div class="card mb-4"  [innerHtml]="myTmplt | safe : 'html'"></div>

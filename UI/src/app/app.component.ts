@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Unmai Zeithi';
-  link = "http://localhost:3000/url?link=https://onezero.medium.com/one-inventors-race-to-treat-parkinson-s-with-an-app-f2bf197ee70"
+  //link = "http://localhost:3000/url?link=https://onezero.medium.com/one-inventors-race-to-treat-parkinson-s-with-an-app-f2bf197ee70"
 }
