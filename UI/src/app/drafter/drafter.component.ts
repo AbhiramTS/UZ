@@ -12,6 +12,8 @@ export class DrafterComponent implements OnInit {
   prvwPlaceholder = "<div class='draftPrvwPlaceholder' style='font-size: 30px;margin-left: auto;margin-right:"
       +"auto;margin: 0;position: absolute;top: 50%;left: 40vw;'>Article Preview Appears Here</div>";
   private myTmplt : any = this.prvwPlaceholder;
+  private artHash = "";
+  private disablePublish = true;
 
   constructor(private http: HttpClient) { }
 
@@ -22,6 +24,8 @@ export class DrafterComponent implements OnInit {
     console.log(this.link+artLink);
     this.http.get(this.link+artLink,{responseType: 'text'}).subscribe((data: any ) => {
       this.myTmplt = data;
+      this.artHash = "> Pass article hash generated here <";
+      this.disablePublish = false;
     });
   }
 
