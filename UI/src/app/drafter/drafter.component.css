@@ -1,5 +1,5 @@
 .draftCntnr{
-    margin-top: 50px;
+    margin-top: 30px;
     height: 10vh;
 }
 
@@ -9,16 +9,14 @@
     background: aliceblue;
     border: #007bff 4px dashed;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; 
     overflow-y: scroll;
 }
 
 .draftPrvwPlaceholder{
     font-size: 30px;
     margin-left: auto;
-    margin-right: auto;
-    margin: 0;
-    position: absolute;               
+    margin-right: auto;          
     top: 50%; 
     left: 40vw;                        
 }
