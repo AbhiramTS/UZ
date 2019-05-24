@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 
 @Component({
@@ -21,7 +21,7 @@ export class DrafterComponent implements OnInit {
   }
 
   getPreview(artLink){
-    console.log(this.link+artLink);
+    //console.log(this.link+artLink);
     this.http.get(this.link+artLink,{responseType: 'text'}).subscribe((data: any ) => {
       this.myTmplt = data;
       this.artHash = "> Pass article hash generated here <";

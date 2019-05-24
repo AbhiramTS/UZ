@@ -1,6 +1,6 @@
 .form_container
 {
-    margin-top: 50px;
+    margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
     width: 90%;
@@ -22,6 +22,7 @@
     margin: auto;
     /* text-align: center; */
     background-color: aliceblue;
+    border-radius: 15px;
     -webkit-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     -moz-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     -ms-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);

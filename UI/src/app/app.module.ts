@@ -14,6 +14,7 @@ import { NewstreamComponent } from './newstream/newstream.component';
 import { DrafterComponent } from './drafter/drafter.component';
 import { TemplatingComponent } from './templating/templating.component';
 import { SafePipe } from './safe.pipe';
+import { ViewarticleComponent } from './viewarticle/viewarticle.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SafePipe } from './safe.pipe';
     NewstreamComponent,
     DrafterComponent,
     TemplatingComponent,
-    SafePipe
+    SafePipe,
+    ViewarticleComponent
   ],
   imports: [
     BrowserModule,

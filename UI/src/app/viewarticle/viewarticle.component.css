@@ -1,0 +1,49 @@
+.artCntnr{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.artCard{
+    padding: 50px 50px 30px 50px;
+    margin: auto;
+    /* text-align: center; */
+    background-color: #fff;
+    -webkit-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    -moz-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    -ms-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    -o-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.fdbckBox{
+    position: fixed;
+    top: 25vh;
+    right: 8vw;
+    /*background: #dee9f1;*/
+    height: 230px;
+    width: 120px;
+}
+
+.upBtn{
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 60px 100px 60px;
+    border-color: transparent transparent #c5c5c5 transparent;
+}
+
+.upBtn:hover{
+    border-color: transparent transparent #0d8c4e transparent;
+}
+
+.downBtn{
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 100px 60px 0 60px;
+    border-color: #c5c5c5 transparent transparent transparent;
+}
+
+.downBtn:hover{
+    border-color: #a31212 transparent transparent transparent;
+}
