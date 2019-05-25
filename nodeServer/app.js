@@ -24,6 +24,7 @@ app.use(function(req, res, next) {
     next();
   });
 
+app.use('/register', registerRoutes);
 
 app.listen(process.env.PORT || 4000, ()=>{
     console.log('Backend running at http://127.0.0.1:3000');
