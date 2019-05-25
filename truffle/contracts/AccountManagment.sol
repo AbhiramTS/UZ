@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-import "./permission.sol";
+import "./Permission.sol";
 import "./Vote.sol";
 
 contract AccountManagment is Permission, Vote{
