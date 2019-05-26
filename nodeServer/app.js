@@ -3,13 +3,17 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyparser = require('body-parser');
 const path = require('path');
+const passport = require('passport');
 
-const dbconnect = require('./dbconnect');
+const keys = require('./config/keys');
+const passportSetup = require('./config/passport_setup');
+
+const authRoute = require('./routes/authRoute');
 
 
 
 mongoose.Promise = global.Promise;
-mongoose.connect(dbconnect.db, {useNewUrlParser :true}).then(()=>{
+mongoose.connect(keys.db, {useNewUrlParser :true}).then(()=>{
     console.log('Database is connected') },
     err => { console.log('Cannot connect to DB'+err)}
 );
@@ -24,8 +28,12 @@ app.use(function(req, res, next) {
     next();
   });
 
-app.use('/register', registerRoutes);
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+app.use('/auth', authRoute);
 
 app.listen(process.env.PORT || 4000, ()=>{
-    console.log('Backend running at http://127.0.0.1:3000');
+    console.log('Backend running at http://127.0.0.1:4000');
 });
