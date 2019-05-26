@@ -4,6 +4,8 @@ import { Router } from "@angular/router";
 import { Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
+import { AuthService } from '../services/auth.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +13,7 @@ import { tap, catchError } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -23,11 +25,30 @@ export class LoginComponent implements OnInit {
   login() {
     this.http.post(this.url+'/login',this.loginData).subscribe(resp => {
       this.data = resp;
-      localStorage.setItem('jwtToken', this.data.token);
+      console.log(this.data);
+      localStorage.setItem('UZtoken', JSON.stringify(this.data));
+      this.authService.login();
       this.router.navigate(['/']);
     }, err => {
       this.message = err.error.msg;
     });
   }
+/* TO BE USED ALONG WITH LOGIN FUNCTION IN AUTHSERVICE
+  onSubmit() {
+
+    stop here if form is invalid
+    if (this.loginForm.invalid) {
+        return;
+    }
+
+    this.authService.login(this.loginData)
+        .subscribe(
+            data => {
+                this.router.navigate(['/']);
+            },
+            err => {
+              this.message = err.error.msg;
+            });
+}*/
 
 }

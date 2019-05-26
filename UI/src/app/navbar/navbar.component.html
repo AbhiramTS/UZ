@@ -6,9 +6,10 @@
     </form>
     
     <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-      <li><a routerLink="/newArticle"> + Submit article</a></li>
-      <li><a routerLink="/login">Login</a></li>
-      <li><a routerLink="/register">Join Us</a></li>
+      <li *ngIf="this.authService.currentUserValue"><a routerLink="/newArticle"> + Submit article</a></li>
+      <li *ngIf="!this.authService.currentUserValue"><a routerLink="/login">Login</a></li>
+      <li *ngIf="!this.authService.currentUserValue"><a routerLink="/register">Join Us</a></li>
+      <li *ngIf="this.authService.currentUserValue" (click)="logout()"><a>Log Out</a></li>
       
       <!--
       <li class="dropdown"><a routerLink="/newBill">Bill</a>

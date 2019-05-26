@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http'
 export class ViewarticleComponent implements OnInit {
 
   private artLink = "http://localhost:3000/url?link=";
-  private article = "";
+  private article = "Loading...";
   constructor(private http: HttpClient, private route: ActivatedRoute) { 
   }
 

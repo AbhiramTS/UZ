@@ -6,5 +6,5 @@ export class User
     password : String;
     dob : Date;
     gender : String;
-    articles : []
+    articles : [];
 }
