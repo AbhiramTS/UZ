@@ -72,3 +72,43 @@
 16:36:07.601991 table@remove removed @12
 16:38:26.465547 db@close closing
 16:38:26.465765 db@close done T·210.712µs
+=============== May 21, 2019 (IST) ===============
+17:38:41.513638 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+17:38:41.513746 CURRENT: missing target file: MANIFEST-000015
+17:38:41.513774 CURRENT.bak: missing target file: MANIFEST-000011
+17:38:41.639100 db@open opening
+17:38:41.640694 version@stat F·[] S·0B[] Sc·[]
+17:38:41.672824 db@janitor F·2 G·0
+17:38:41.672888 db@open done T·33.737452ms
+17:46:59.705699 db@close closing
+17:46:59.717911 db@close done T·12.193257ms
+=============== May 21, 2019 (IST) ===============
+19:12:40.234229 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+19:12:40.250227 version@stat F·[] S·0B[] Sc·[]
+19:12:40.250249 db@open opening
+19:12:40.250339 journal@recovery F·1
+19:12:40.261566 journal@recovery recovering @1
+19:12:40.384854 memdb@flush created L0@2 N·887 S·28KiB "n:\v..ing,v84":"version,v1"
+19:12:40.385050 version@stat F·[1] S·28KiB[28KiB] Sc·[0.25]
+19:12:40.528317 db@janitor F·3 G·0
+19:12:40.528390 db@open done T·278.129859ms
+19:19:15.313913 db@close closing
+19:19:15.331829 db@close done T·17.911597ms
+=============== May 21, 2019 (IST) ===============
+19:29:33.147038 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+19:29:33.185631 version@stat F·[1] S·28KiB[28KiB] Sc·[0.25]
+19:29:33.185661 db@open opening
+19:29:33.185736 journal@recovery F·1
+19:29:33.185890 journal@recovery recovering @3
+19:29:33.274531 memdb@flush created L0@5 N·698 S·23KiB "n:\x01..ing,v938":"n:\xff..ing,v1211"
+19:29:33.274757 version@stat F·[2] S·52KiB[52KiB] Sc·[0.50]
+19:29:33.375939 db@janitor F·4 G·0
+19:29:33.375970 db@open done T·190.299298ms
+19:29:33.383797 table@compaction L0·2 -> L1·0 S·52KiB Q·1587
+19:29:33.465048 table@build created L1@8 N·1278 S·48KiB "n:\x01..ing,v938":"version,v1"
+19:29:33.465107 version@stat F·[0 1] S·48KiB[0B 48KiB] Sc·[0.00 0.00]
+19:29:33.521051 table@compaction committed F-1 S-3KiB Ke·0 D·307 T·137.209403ms
+19:29:33.521139 table@remove removed @5
+19:29:33.521164 table@remove removed @2
+19:31:36.530945 db@close closing
+19:31:36.531078 db@close done T·130.98µs

@@ -3,21 +3,25 @@
         <div class="login_card">
           <div class="reg_tbl_container">
             <h3>Login</h3><br>
-            <form action="/action_page.php">
+            <form class="form-signin" (ngSubmit)="login()" #loginForm="ngForm">
+              <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{message}}
+              </div>
               <div class="form-group">
                 <label for="email">Email address:</label>
-                <input type="text" class="form-control" id="email">
+                <input type="text" class="form-control" placeholder="Email address" [(ngModel)]="loginData.email" name="email" required/>
               </div>
               <div class="form-group">
                 <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd">
+                <input type="password" class="form-control" placeholder="Password" [(ngModel)]="loginData.pwd" name="pwd" required/>
               </div>
               <div class="form-group form-check">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox"> Remember me
+                  <input class="form-check-input" type="checkbox"> Remember me*
                 </label>
               </div>
-              <button type="submit" class="btn btn-primary">Login</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid">Login</button>
             </form>
             <div class="or_divider"> OR </div>
               <a class="google-btn" href="/auth/google">
@@ -31,7 +35,8 @@
                           </span>
                       </div>  
                   </div> 
-              </a> 
+              </a><br>
+            Not a member? <a [routerLink]="['/register']">Signup here</a>
           </div>  
         </div>
       </div>

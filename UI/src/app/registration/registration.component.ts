@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Router } from "@angular/router";
+import { Observable } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
+
+import { User } from '../ngDBModels'
 
 @Component({
   selector: 'app-registration',
@@ -7,9 +14,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
+    this.createForm();
+  }
+
+  registerForm: FormGroup;
+  newUser: User;
+  message = ''
+  url = "http://127.0.0.1:4000/auth";
+
+  createForm(){
+    this.registerForm = this.fb.group({
+      name : ['', Validators.required],
+      email : ['', Validators.required],
+      reemail : ['', Validators.required],
+      pwd : ['', Validators.required],
+      dob : ['', Validators.required],
+      gender : ['']
+    });
+  }
+
+  register(){
+    this.newUser = {
+      name : this.registerForm.get('name').value,
+      email : this.registerForm.get('email').value,
+      password : this.registerForm.get('pwd').value,
+      dob : this.registerForm.get('dob').value,
+      gender : this.registerForm.get('gender').value,
+      articles : []
+    };
+    console.log('Sending req');
+    this.http.post(this.url+'/register',this.newUser).subscribe(resp => {
+      console.log(resp);
+      this.router.navigate(['login']);
+    }, err => {
+      this.message = err.error.msg;
+    });
   }
 
 }

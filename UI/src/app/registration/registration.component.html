@@ -3,34 +3,34 @@
         <div class="login_card">
           <div class="reg_tbl_container">
             <h3>Register</h3><br>
-            <form action="/action_page.php">
+            <form [formGroup]="registerForm">
               <div class="form-group">
-                  <label for="name">Name:</label>
-                  <input type="text" class="form-control" id="name">
+                  <label for="uname">Name:</label>
+                  <input type="text" class="form-control" id="name" formControlName="name" #name>
                 </div>
               <div class="form-group">
                 <label for="email">Email address:</label>
-                <input type="text" class="form-control" id="email">
+                <input type="text" class="form-control" id="email" formControlName="email" #email>
               </div>
               <div class="form-group">
                   <label for="reemail">Re-enter Email address:</label>
-                  <input type="text" class="form-control" id="reemail">
+                  <input type="text" class="form-control" id="reemail" formControlName="reemail" #reemail>
                 </div>
               <div class="form-group">
                 <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd">
+                <input type="password" class="form-control" id="pwd" formControlName="pwd" #pwd>
               </div>
               <div class="form-group">
                   <label for="dob">Date of Birth:</label>
-                  <input type="date" class="form-control" id="dob">
+                  <input type="date" class="form-control" id="dob" formControlName="dob" #dob>
                 </div>
-              <input type="radio" name="gender" id="gen_female" value="female"/>
+              <input type="radio" name="gender" id="gen_female" value="female" formControlName="gender" #gender/>
                   <label for="gen_female">Female</label>
               
-              <input type="radio" name="gender" id="gen_male" value="male"/>
+              <input type="radio" name="gender" id="gen_male" value="male" formControlName="gender" #gender/>
                   <label for="gen_male">Male</label>
               <br><br>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" (click)="register()">Submit</button>
             </form>
             <div class="or_divider"> OR </div>
               <a class="google-btn" href="/auth/google">
