@@ -26,9 +26,9 @@ contract AccountManagment is Permission, Vote{
         address publisher;
         string link;
         string timestamp;
-        int aRank;
-        int uVote;
-        int dVote;
+        int64 aRank;
+        int64 uVote;
+        int64 dVote;
     }
     mapping (address => myArticle) public art;
     function newUser(address _uid, string memory _name, string memory _email) public onlyNode {

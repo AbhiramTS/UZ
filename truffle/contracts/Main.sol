@@ -1,8 +1,8 @@
 pragma solidity ^0.5.0;
 
-import './AccountManagment.sol';
+import './voting.sol';
 
-contract Main is AccountManagment {
+contract Main is voting {
     constructor(string memory _name, string memory _email) public {
         node[msg.sender] = true;
         newUser(msg.sender, _name, _email);
