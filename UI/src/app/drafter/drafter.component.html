@@ -1,0 +1,25 @@
+<div class="container draftCntnr">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Enter the URL to the article:" aria-label="Enter the URL to the article:" #artLink
+      (input)="getPreview(artLink.value)">
+      <div class="input-group-append">
+        <button class="btn btn-success" type="button" id="artLink" [disabled]="disablePublish">Publish</button>
+      </div>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Article Hash</span>
+        </div>
+        <input type="text" [value]="artHash" class="form-control" placeholder="Article Hash Appears Here" aria-label="artHash" readonly>
+      </div>    
+</div>
+
+<br>
+
+<div class="artPreviewCntnr" [innerHtml]="myTmplt | safe : 'html'">
+
+  <div class="draftPrvwPlaceholder">
+    Article Preview Appears Here
+  </div>
+
+</div>

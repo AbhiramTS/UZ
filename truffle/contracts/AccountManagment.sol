@@ -1,7 +1,10 @@
 pragma solidity ^0.5.0;
 
 import "./Permission.sol";
+<<<<<<< HEAD
 import "./Vote.sol";
+=======
+>>>>>>> UserInterface
 
 contract AccountManagment is Permission, Vote{
     struct myNode{
