@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import { Router, ActivatedRoute} from "@angular/router";
 import { HttpClient } from '@angular/common/http'
+
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-viewarticle',
@@ -9,9 +11,10 @@ import { HttpClient } from '@angular/common/http'
 })
 export class ViewarticleComponent implements OnInit {
 
+
   private artLink = "http://localhost:3000/url?link=";
   private article = "Loading...";
-  constructor(private http: HttpClient, private route: ActivatedRoute) { 
+  constructor(private http: HttpClient, private route: ActivatedRoute, private authService: AuthService, private router:Router) { 
   }
 
   ngOnInit() {
@@ -25,6 +28,37 @@ export class ViewarticleComponent implements OnInit {
     this.http.get(this.artLink+link,{responseType: 'text'}).subscribe((data: any ) => {
       this.article = data;
     });
+  }
+
+  upVote(){
+    if(!this.authService.currentUserValue){
+      //alert("Login to make upvote/downvote ");
+      this.openModal();      
+    }
+    else{
+      //call the contract function to upvote
+    }
+  }
+
+  downVote(){
+    if(!this.authService.currentUserValue){
+      alert("Login to make upvote/downvote ");
+    }
+    else{
+      //call the contract function to downvote
+    }
+  }
+
+  openModal() {
+    document.getElementById('openModalButton').click();
+  }
+
+  redirectToLogin(){
+    this.router.navigate(['/login']);
+  }
+
+  redirectToRegister(){
+    this.router.navigate(['/register']);
   }
 
 }

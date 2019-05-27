@@ -18,6 +18,7 @@ import { DrafterComponent } from './drafter/drafter.component';
 import { TemplatingComponent } from './templating/templating.component';
 import { SafePipe } from './safe.pipe';
 import { ViewarticleComponent } from './viewarticle/viewarticle.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ViewarticleComponent } from './viewarticle/viewarticle.component';
     DrafterComponent,
     TemplatingComponent,
     SafePipe,
-    ViewarticleComponent
+    ViewarticleComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
