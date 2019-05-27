@@ -9,6 +9,7 @@ const keys = require('./config/keys');
 const passportSetup = require('./config/passport_setup');
 
 const authRoute = require('./routes/authRoute');
+const articleRoute = require('./routes/articleRoute');
 
 
 
@@ -33,6 +34,7 @@ app.use(passport.session());
 
 
 app.use('/auth', authRoute);
+app.use('/article', articleRoute);
 
 app.listen(process.env.PORT || 4000, ()=>{
     console.log('Backend running at http://127.0.0.1:4000');
