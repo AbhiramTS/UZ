@@ -1,10 +1,7 @@
 pragma solidity ^0.5.0;
 
 import "./Permission.sol";
-<<<<<<< HEAD
 import "./Vote.sol";
-=======
->>>>>>> UserInterface
 
 contract AccountManagment is Permission, Vote{
     struct myNode{
@@ -34,7 +31,7 @@ contract AccountManagment is Permission, Vote{
         int64 dVote;
     }
     mapping (address => myArticle) public art;
-    function newUser(address _uid, string memory _name, string memory _email) public onlyNode {
+    function newUser(address _uid, string memory _name, string memory _email) public  {
        usr[_uid].name = _name;
        usr[_uid].email = _email;
         addUser(_uid);
@@ -43,7 +40,7 @@ contract AccountManagment is Permission, Vote{
         address _auth, address _pub, string memory _tmstamp) public onlyUser
     {
             art[_artid] = myArticle({artHash: _aHash, author: _auth, publisher: _pub,
-                link: _link, timestamp: _tmstamp, aRank : 100, uVote : 0, dVote : 0});
+                link: _link, timestamp: _tmstamp, aRank : 0, uVote : 0, dVote : 0});
         addArticle(_artid);
     }
     function getUser(address _userAddress) public view returns(

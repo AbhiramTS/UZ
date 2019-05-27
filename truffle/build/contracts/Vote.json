@@ -12,14 +12,14 @@
     "absolutePath": "/home/abhiram/Documents/UZ/truffle/contracts/Vote.sol",
     "exportedSymbols": {
       "Vote": [
-        605
+        609
       ]
     },
-    "id": 606,
+    "id": 610,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 592,
+        "id": 596,
         "literals": [
           "solidity",
           "^",
@@ -35,31 +35,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 605,
+        "id": 609,
         "linearizedBaseContracts": [
-          605
+          609
         ],
         "name": "Vote",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "Vote.vote",
-            "id": 596,
+            "id": 600,
             "members": [
               {
-                "id": 593,
+                "id": 597,
                 "name": "DEFAULT",
                 "nodeType": "EnumValue",
                 "src": "65:7:5"
               },
               {
-                "id": 594,
+                "id": 598,
                 "name": "UP",
                 "nodeType": "EnumValue",
                 "src": "82:2:5"
               },
               {
-                "id": 595,
+                "id": 599,
                 "name": "DOWN",
                 "nodeType": "EnumValue",
                 "src": "94:4:5"
@@ -71,26 +71,26 @@
           },
           {
             "constant": true,
-            "id": 600,
+            "id": 604,
             "name": "defaultVote",
             "nodeType": "VariableDeclaration",
-            "scope": 605,
+            "scope": 609,
             "src": "109:40:5",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_enum$_vote_$596",
+              "typeIdentifier": "t_enum$_vote_$600",
               "typeString": "enum Vote.vote"
             },
             "typeName": {
               "contractScope": null,
-              "id": 597,
+              "id": 601,
               "name": "vote",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 596,
+              "referencedDeclaration": 600,
               "src": "109:4:5",
               "typeDescriptions": {
-                "typeIdentifier": "t_enum$_vote_$596",
+                "typeIdentifier": "t_enum$_vote_$600",
                 "typeString": "enum Vote.vote"
               }
             },
@@ -98,18 +98,18 @@
               "argumentTypes": null,
               "expression": {
                 "argumentTypes": null,
-                "id": 598,
+                "id": 602,
                 "name": "vote",
                 "nodeType": "Identifier",
                 "overloadedDeclarations": [],
-                "referencedDeclaration": 596,
+                "referencedDeclaration": 600,
                 "src": "137:4:5",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_type$_t_enum$_vote_$596_$",
+                  "typeIdentifier": "t_type$_t_enum$_vote_$600_$",
                   "typeString": "type(enum Vote.vote)"
                 }
               },
-              "id": 599,
+              "id": 603,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -119,7 +119,7 @@
               "referencedDeclaration": null,
               "src": "137:12:5",
               "typeDescriptions": {
-                "typeIdentifier": "t_enum$_vote_$596",
+                "typeIdentifier": "t_enum$_vote_$600",
                 "typeString": "enum Vote.vote"
               }
             },
@@ -127,21 +127,21 @@
           },
           {
             "constant": false,
-            "id": 604,
+            "id": 608,
             "name": "userVote",
             "nodeType": "VariableDeclaration",
-            "scope": 605,
+            "scope": 609,
             "src": "155:33:5",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_address_$_t_enum$_vote_$596_$",
+              "typeIdentifier": "t_mapping$_t_address_$_t_enum$_vote_$600_$",
               "typeString": "mapping(address => enum Vote.vote)"
             },
             "typeName": {
-              "id": 603,
+              "id": 607,
               "keyType": {
-                "id": 601,
+                "id": 605,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "163:7:5",
@@ -153,18 +153,18 @@
               "nodeType": "Mapping",
               "src": "155:24:5",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_address_$_t_enum$_vote_$596_$",
+                "typeIdentifier": "t_mapping$_t_address_$_t_enum$_vote_$600_$",
                 "typeString": "mapping(address => enum Vote.vote)"
               },
               "valueType": {
                 "contractScope": null,
-                "id": 602,
+                "id": 606,
                 "name": "vote",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 596,
+                "referencedDeclaration": 600,
                 "src": "174:4:5",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_vote_$596",
+                  "typeIdentifier": "t_enum$_vote_$600",
                   "typeString": "enum Vote.vote"
                 }
               }
@@ -173,7 +173,7 @@
             "visibility": "internal"
           }
         ],
-        "scope": 606,
+        "scope": 610,
         "src": "25:166:5"
       }
     ],
@@ -183,14 +183,14 @@
     "absolutePath": "/home/abhiram/Documents/UZ/truffle/contracts/Vote.sol",
     "exportedSymbols": {
       "Vote": [
-        605
+        609
       ]
     },
-    "id": 606,
+    "id": 610,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 592,
+        "id": 596,
         "literals": [
           "solidity",
           "^",
@@ -206,31 +206,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 605,
+        "id": 609,
         "linearizedBaseContracts": [
-          605
+          609
         ],
         "name": "Vote",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "Vote.vote",
-            "id": 596,
+            "id": 600,
             "members": [
               {
-                "id": 593,
+                "id": 597,
                 "name": "DEFAULT",
                 "nodeType": "EnumValue",
                 "src": "65:7:5"
               },
               {
-                "id": 594,
+                "id": 598,
                 "name": "UP",
                 "nodeType": "EnumValue",
                 "src": "82:2:5"
               },
               {
-                "id": 595,
+                "id": 599,
                 "name": "DOWN",
                 "nodeType": "EnumValue",
                 "src": "94:4:5"
@@ -242,26 +242,26 @@
           },
           {
             "constant": true,
-            "id": 600,
+            "id": 604,
             "name": "defaultVote",
             "nodeType": "VariableDeclaration",
-            "scope": 605,
+            "scope": 609,
             "src": "109:40:5",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_enum$_vote_$596",
+              "typeIdentifier": "t_enum$_vote_$600",
               "typeString": "enum Vote.vote"
             },
             "typeName": {
               "contractScope": null,
-              "id": 597,
+              "id": 601,
               "name": "vote",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 596,
+              "referencedDeclaration": 600,
               "src": "109:4:5",
               "typeDescriptions": {
-                "typeIdentifier": "t_enum$_vote_$596",
+                "typeIdentifier": "t_enum$_vote_$600",
                 "typeString": "enum Vote.vote"
               }
             },
@@ -269,18 +269,18 @@
               "argumentTypes": null,
               "expression": {
                 "argumentTypes": null,
-                "id": 598,
+                "id": 602,
                 "name": "vote",
                 "nodeType": "Identifier",
                 "overloadedDeclarations": [],
-                "referencedDeclaration": 596,
+                "referencedDeclaration": 600,
                 "src": "137:4:5",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_type$_t_enum$_vote_$596_$",
+                  "typeIdentifier": "t_type$_t_enum$_vote_$600_$",
                   "typeString": "type(enum Vote.vote)"
                 }
               },
-              "id": 599,
+              "id": 603,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -290,7 +290,7 @@
               "referencedDeclaration": null,
               "src": "137:12:5",
               "typeDescriptions": {
-                "typeIdentifier": "t_enum$_vote_$596",
+                "typeIdentifier": "t_enum$_vote_$600",
                 "typeString": "enum Vote.vote"
               }
             },
@@ -298,21 +298,21 @@
           },
           {
             "constant": false,
-            "id": 604,
+            "id": 608,
             "name": "userVote",
             "nodeType": "VariableDeclaration",
-            "scope": 605,
+            "scope": 609,
             "src": "155:33:5",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_address_$_t_enum$_vote_$596_$",
+              "typeIdentifier": "t_mapping$_t_address_$_t_enum$_vote_$600_$",
               "typeString": "mapping(address => enum Vote.vote)"
             },
             "typeName": {
-              "id": 603,
+              "id": 607,
               "keyType": {
-                "id": 601,
+                "id": 605,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "163:7:5",
@@ -324,18 +324,18 @@
               "nodeType": "Mapping",
               "src": "155:24:5",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_address_$_t_enum$_vote_$596_$",
+                "typeIdentifier": "t_mapping$_t_address_$_t_enum$_vote_$600_$",
                 "typeString": "mapping(address => enum Vote.vote)"
               },
               "valueType": {
                 "contractScope": null,
-                "id": 602,
+                "id": 606,
                 "name": "vote",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 596,
+                "referencedDeclaration": 600,
                 "src": "174:4:5",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_vote_$596",
+                  "typeIdentifier": "t_enum$_vote_$600",
                   "typeString": "enum Vote.vote"
                 }
               }
@@ -344,7 +344,7 @@
             "visibility": "internal"
           }
         ],
-        "scope": 606,
+        "scope": 610,
         "src": "25:166:5"
       }
     ],
@@ -356,7 +356,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.6",
-  "updatedAt": "2019-05-25T09:56:49.598Z",
+  "updatedAt": "2019-05-27T10:16:04.222Z",
   "devdoc": {
     "methods": {}
   },
