@@ -14,8 +14,11 @@ export class ViewarticleComponent implements OnInit {
 
   private artLink = "http://localhost:3000/url?link=";
   private article = "Loading...";
+  private upVotes = 154;
+  private downVotes = 26;
   constructor(private http: HttpClient, private route: ActivatedRoute, private authService: AuthService, private router:Router) { 
   }
+
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {

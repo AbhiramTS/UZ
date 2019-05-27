@@ -32,7 +32,9 @@
 
 .strmImgCntnr{
     width: 27vw;
-    overflow: hidden;
+    height: 275px;
+    overflow: hidden; 
+    border-bottom: #b9b5b5 1px solid;
 }
 
 .strmImg{

@@ -4,9 +4,12 @@ const Schema = mongoose.Schema;
 
 let Article = new Schema({
     artId : {type : String},
+    hash : {type : String},
     link : {type : String},
+    img: {type : String},
     title : {type : String},
     author : {type : String},
+    authorId : {type : String},
     votes : [{
                     user : {type : String},
                     value : {type : Number}
