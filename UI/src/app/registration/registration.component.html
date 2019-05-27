@@ -32,7 +32,7 @@
               <br><br>
               <button type="submit" class="btn btn-primary" (click)="register()">Submit</button>
             </form>
-            <div class="or_divider"> OR </div>
+            <!--<div class="or_divider"> OR </div>
               <a class="google-btn" href="/auth/google">
                   <div class='g-sign-in-button'>
                       <div class=content-wrapper>
@@ -44,7 +44,9 @@
                           </span>
                       </div>  
                   </div> 
-              </a> 
+              </a> -->
+              <br>
+              Already a member? <a [routerLink]="['/login']">Login here</a>
           </div>  
         </div>
       </div>

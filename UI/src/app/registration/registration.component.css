@@ -85,11 +85,11 @@
     border: 1px solid transparent;
   }
   .g-sign-in-button img {
-      width: 18px;
-      height: 18px;
+      width: 28px;
+      height: 28px;
   }
   .g-sign-in-button .logo-wrapper {
-     padding: 15px;
+     padding: 12px;
      background:#fff;
      width: 48px;
      height: 100%;
