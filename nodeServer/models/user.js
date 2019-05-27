@@ -18,17 +18,14 @@ var User = new Schema({
 });
 
 User.pre('save', function (next) {
-    console.log('hashing password');
     var user = this;
     if (this.isModified('password') || this.isNew) {
         bcrypt.genSalt(10, function (err, salt) {
             if (err) {
-                console.log(err);
                 return next(err);
             }
             bcrypt.hash(user.password, salt, function (err, hash) {
                 if (err) {
-                    console.log(err);
                     return next(err);
                 }
                 user.password = hash;
