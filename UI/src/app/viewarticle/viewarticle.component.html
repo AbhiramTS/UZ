@@ -7,9 +7,19 @@
 </div>
 
 <div class="fdbckBox">
-  <a><div class="fdbckBtn upBtn" (click)="upVote()"></div></a>
+  <a>
+    <div class="fdbckBtn upBtn" (click)="upVote()">
+      <div class="upNum">154</div>
+    </div>
+  </a>
+
   <br>
-  <a><div class="fdbckBtn downBtn" (click)="downVote()"></div></a>
+
+  <a>
+    <div class="fdbckBtn downBtn" (click)="downVote()">
+      <div class="downNum">21</div>
+    </div>
+  </a>
 </div>
 
 <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>

@@ -36,6 +36,17 @@
     border-color: transparent transparent #0d8c4e transparent;
 }
 
+.upNum{
+    position: relative;
+    top: 58px;
+    left: -15px;
+    font-weight: bold;
+}
+
+.upBtn:hover .upNum{
+    color: #fff;
+}
+
 .downBtn{
     width: 0;
     height: 0;
@@ -45,5 +56,24 @@
 }
 
 .downBtn:hover{
+    border-color: #a31212 transparent transparent transparent;
+}
+
+.downNum{
+    position: relative;
+    top: -84px;
+    left: -8px;
+    font-weight: bold;
+}
+
+.downBtn:hover .downNum{
+    color: #fff;
+}
+
+.upvoted{
+    border-color: transparent transparent #0d8c4e transparent;
+}
+
+.downvoted{
     border-color: #a31212 transparent transparent transparent;
 }

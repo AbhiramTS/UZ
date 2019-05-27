@@ -42,7 +42,8 @@ export class ViewarticleComponent implements OnInit {
 
   downVote(){
     if(!this.authService.currentUserValue){
-      alert("Login to make upvote/downvote ");
+      //alert("Login to make upvote/downvote ");
+      this.openModal(); 
     }
     else{
       //call the contract function to downvote
