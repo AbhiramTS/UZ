@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
 
+import { ArticleService } from '../services/article.service';
+
 import { Article } from '../ngDBModels';
 
 @Component({
@@ -21,13 +23,12 @@ export class DrafterComponent implements OnInit {
   data;
   message = "";
 
-  constructor(private http: HttpClient,  private router: Router) { }
+  constructor(private http: HttpClient,  private router: Router, private articleService: ArticleService) { }
 
   ngOnInit() {
   }
 
   getPreview(artLink){
-    //console.log(this.link+artLink);
     this.http.get(this.link+"url?link="+artLink,{responseType: 'text'}).subscribe((data: any ) => {
       this.myTmplt = data;
       this.artHash = "> Pass article hash generated here <";
@@ -43,15 +44,20 @@ export class DrafterComponent implements OnInit {
       link: 'https://medium.com/front-end-weekly/learn-using-jwt-with-passport-authentication-9761539c4314',
       author: 'testAuthor',
       authorId: 'authorID',
-      votes: []
-    }
-    this.http.post(this.link+"article/submit",this.newArticle).subscribe(resp => {
-      this.data = resp;
-      console.log(this.data);
-      this.router.navigate(['/']);
-    }, err => {
-      this.message = err.error.msg;
-    });
+      votes: [],
+      upVotes: 1,
+      downVotes: 0
+    };
+    this.data = this.articleService.newArticle(this.newArticle);
+    this.router.navigate(['/']);
+
+    // this.http.post(this.link+"article/submit",this.newArticle).subscribe(resp => {
+    //   this.data = resp;
+    //   console.log(this.data);
+    //   this.router.navigate(['/']);
+    // }, err => {
+    //   this.message = err.error.msg;
+    // });
   }
 
 }

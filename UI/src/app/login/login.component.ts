@@ -22,24 +22,13 @@ export class LoginComponent implements OnInit {
   message = '';
   data: any;
 
-  login() {
-    this.http.post(this.url+'/login',this.loginData).subscribe(resp => {
-      this.data = resp;
-      console.log(this.data);
-      localStorage.setItem('UZtoken', JSON.stringify(this.data));
-      this.authService.login();
-      this.router.navigate(['/']);
-    }, err => {
-      this.message = err.error.msg;
-    });
-  }
-/* TO BE USED ALONG WITH LOGIN FUNCTION IN AUTHSERVICE
-  onSubmit() {
+  
 
-    stop here if form is invalid
+  onSubmit(){
+    /* stop here if form is invalid
     if (this.loginForm.invalid) {
         return;
-    }
+    }*/
 
     this.authService.login(this.loginData)
         .subscribe(
@@ -49,6 +38,18 @@ export class LoginComponent implements OnInit {
             err => {
               this.message = err.error.msg;
             });
-}*/
+  }
+
+  // login() {
+  //   this.http.post(this.url+'/login',this.loginData).subscribe(resp => {
+  //     this.data = resp;
+  //     console.log(this.data);
+  //     localStorage.setItem('UZtoken', JSON.stringify(this.data));
+  //     this.authService.login();
+  //     this.router.navigate(['/']);
+  //   }, err => {
+  //     this.message = err.error.msg;
+  //   });
+  // }
 
 }

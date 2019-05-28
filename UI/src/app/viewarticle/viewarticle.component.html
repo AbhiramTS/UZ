@@ -8,7 +8,7 @@
 
 <div class="fdbckBox">
   <a>
-    <div class="fdbckBtn upBtn" (click)="upVote()">
+    <div class="fdbckBtn upBtn {{upVoted}}" (click)="upVote()">
       <div class="upNum">{{upVotes}}</div>
     </div>
   </a>
@@ -16,7 +16,7 @@
   <br>
 
   <a>
-    <div class="fdbckBtn downBtn" (click)="downVote()">
+    <div class="fdbckBtn downBtn {{downVoted}}" (click)="downVote()">
       <div class="downNum">{{downVotes}}</div>
     </div>
   </a>

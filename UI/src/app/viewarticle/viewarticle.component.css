@@ -72,8 +72,10 @@
 
 .upvoted{
     border-color: transparent transparent #0d8c4e transparent;
+    color: #fff;
 }
 
 .downvoted{
     border-color: #a31212 transparent transparent transparent;
+    color: #fff;
 }

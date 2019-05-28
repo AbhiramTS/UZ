@@ -10,12 +10,14 @@ import { Article } from '../ngDBModels';
   styleUrls: ['./newstream.component.css']
 })
 export class NewstreamComponent implements OnInit {
-
+  newsStream;
   constructor(private articleService: ArticleService) { }
   ngOnInit() {
-    //this.newsStream = this.articleService.getStream();
+    this.articleService.getStream().subscribe((stream: Article[])=>{
+      this.newsStream = stream;
+    });
   }
-
+/*
   newsStream = [
     {
       link: "https://medium.com/front-end-weekly/learn-using-jwt-with-passport-authentication-9761539c4314", 
@@ -63,6 +65,6 @@ export class NewstreamComponent implements OnInit {
       votes: "215"
     }
   ];
-
+*/
 
 }

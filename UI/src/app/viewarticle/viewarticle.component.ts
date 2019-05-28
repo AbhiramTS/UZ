@@ -16,6 +16,8 @@ export class ViewarticleComponent implements OnInit {
   private article = "Loading...";
   private upVotes = 154;
   private downVotes = 26;
+  private upVoted = "";
+  private downVoted = "";
   constructor(private http: HttpClient, private route: ActivatedRoute, private authService: AuthService, private router:Router) { 
   }
 
@@ -40,6 +42,8 @@ export class ViewarticleComponent implements OnInit {
     }
     else{
       //call the contract function to upvote
+      this.upVoted = "upvoted";
+      this.downVoted = "";
     }
   }
 
@@ -50,6 +54,8 @@ export class ViewarticleComponent implements OnInit {
     }
     else{
       //call the contract function to downvote
+      this.upVoted = "";
+      this.downVoted = "downvoted";
     }
   }
 

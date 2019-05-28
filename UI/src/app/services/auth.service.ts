@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Router } from "@angular/router";
 
 import { User } from '../ngDBModels';
@@ -13,8 +13,6 @@ export class AuthService {
   private url = "http://127.0.0.1:4000/auth";
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  //data:any;
-  //message = "";
   private curUser;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -27,27 +25,39 @@ export class AuthService {
   }
 
 
-/* TO BE USED ALONG WITH ONSUBMIT FUNCTION IN LOGIN COMPONENT
-  login(loginData) {
-    this.http.post(this.url+'/login',loginData).subscribe(resp => {
-      this.data = resp;
-      localStorage.setItem('UZtoken', this.data.token);
-                this.currentUserSubject.next(this.data);
-                return this.data;
-            }, err => {
-              this.message = err.error.msg;
+  login(loginData):Observable<{}>{
+    let response = new Subject<{}>();
+    let data;
+    this.http.post(this.url+'/login',loginData)
+              .subscribe(res=> {
+                data = res;
+                localStorage.setItem('UZtoken', JSON.stringify(data.token));
+                this.currentUserSubject.next(data);              
+                response.next(res);
             });
-  }
-  */
-
-  login(){
-    this.currentUserSubject.next(JSON.parse(localStorage.getItem('UZtoken')));
+      return response.asObservable();
   }
 
+  register(newUser):Observable<{}>{
+    let response = new Subject<{}>();
+    let data;
+    this.http.post(this.url+'/register',newUser)
+              .subscribe(res=> {             
+                response.next(res);
+            });
+      return response.asObservable();
+  }
 
   logout() {
     localStorage.removeItem('UZtoken');
     this.currentUserSubject.next(null);
     this.router.navigate(['/']);
   }
+
+
+
+
+  // login(){
+  //   this.currentUserSubject.next(JSON.parse(localStorage.getItem('UZtoken')));
+  // }
 }

@@ -3,7 +3,7 @@
         <div class="login_card">
           <div class="reg_tbl_container">
             <h3>Login</h3><br>
-            <form class="form-signin" (ngSubmit)="login()" #loginForm="ngForm">
+            <form class="form-signin" (ngSubmit)="onSubmit()" #loginForm="ngForm">
               <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 {{message}}

@@ -17,5 +17,7 @@ export class Article
     title : String;
     author : String;
     authorId : String;
+    upVotes : Number;
+    downVotes : Number;
     votes : [];
 }

@@ -10,6 +10,9 @@ let Article = new Schema({
     title : {type : String},
     author : {type : String},
     authorId : {type : String},
+    text : { type : String},
+    upVotes : {type : Number},
+    downVotes : {type : Number},
     votes : [{
                     user : {type : String},
                     value : {type : Number}
