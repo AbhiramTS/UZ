@@ -14,10 +14,10 @@ export class ViewarticleComponent implements OnInit {
 
   private artLink = "http://localhost:3000/url?link=";
   private article = "Loading...";
-  private upVotes = 154;
-  private downVotes = 26;
-  private upVoted = "";
-  private downVoted = "";
+  private upVotes = 154;  // <<  TODO: get these details into an Article object and access from it
+  private downVotes = 26; //
+  private upVoted = "";   //
+  private downVoted = ""; // <<
   constructor(private http: HttpClient, private route: ActivatedRoute, private authService: AuthService, private router:Router) { 
   }
 
