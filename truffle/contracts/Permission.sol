@@ -43,7 +43,7 @@ contract Permission{
     function addArticle(address _temp) public onlyUser {
         article[_temp] = true;
     }
-    function addUser(address _temp) public onlyNode{
+    function addUser(address _temp) public{
         user[_temp] = true;
     }
 }

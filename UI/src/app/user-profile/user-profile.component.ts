@@ -11,12 +11,19 @@ import { Article } from '../ngDBModels';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private articleService: ArticleService) { }
-
-  ngOnInit() {
+  newsStream;
+  constructor(private articleService: ArticleService) { 
+    this.usr = {name : 'Test', userId : 'testId', email : 'test@test.com', dob: new Date('01-01-1970'), gender: 'Male'};
   }
 
-  newsStream = [
+  usr;
+  ngOnInit() {
+    this.articleService.getStream().subscribe((stream: Article[])=>{ //TODO: get articles of this user
+    this.newsStream = stream;
+    });
+  }
+
+  /*newsStream = [
     {
       link: "https://medium.com/front-end-weekly/learn-using-jwt-with-passport-authentication-9761539c4314", 
       img: "https://cdn-images-1.medium.com/max/800/1*QTeLq8g_qQ-IL8ry7pBwrg.jpeg",
@@ -62,6 +69,6 @@ export class UserProfileComponent implements OnInit {
       text: "This article is the third part of a series. I recommend you read the first article to understand the purpose of this series, and the second article to learn how to set up your development work environment. I should also mention that creating an API requires intermediate development skills,", 
       votes: "215"
     }
-  ];
+  ];*/
 
 }

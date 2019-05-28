@@ -53,8 +53,9 @@ export class RegistrationComponent implements OnInit {
       gender : this.registerForm.get('gender').value,
       userId : this.registerForm.get('userId').value,
       articles : []
-    };
-    this.authService.register(this.newUser)
+    }; //TODO : insert into blockchain first then do this----|
+       //                                                    | 
+    this.authService.register(this.newUser)       //<--------|
         .subscribe(
             data => { // 'TODO : prevent redirect and show error msg if failed
               this.router.navigate(['/login']);
@@ -63,7 +64,7 @@ export class RegistrationComponent implements OnInit {
               this.message = err.error.msg;
             });
 
-    this.web3S.newUser(this.newUser.name.toString(),this.newUser.email.toString(),this.newUser.userId.toString());
+    this.web3S.newUser(this.newUser.name.toString(),this.newUser.email.toString(),this.newUser.userId.toString()); //TODO: do this before authService.register
   }
 
 

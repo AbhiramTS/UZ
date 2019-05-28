@@ -11,7 +11,9 @@ import { Article } from '../ngDBModels';
 })
 export class NewstreamComponent implements OnInit {
   newsStream;
-  constructor(private articleService: ArticleService) { }
+  
+  constructor(private articleService: ArticleService) {
+   }
   ngOnInit() {
     this.articleService.getStream().subscribe((stream: Article[])=>{
       this.newsStream = stream;
