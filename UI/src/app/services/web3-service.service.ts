@@ -75,7 +75,9 @@ export class Web3ServiceService {
   }
 
   newUser = ( name: string, emai: string, userAddress: string) => {
-    this.UZ.methods.newUser(userAddress, name, emai).send({from: userAddress, gas: 6000000});
+    this.UZ.methods.newUser(userAddress, name, emai).send({from: userAddress, gas: 6000000}).then( v => {
+      console.log(v);
+    });
   }
 
   getUser = (userAddress: string) => {

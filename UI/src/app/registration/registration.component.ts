@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 import { AuthService } from '../services/auth.service';
+import { Web3ServiceService } from '../services/web3-service.service'
 
 import { User } from '../ngDBModels'
 
@@ -16,7 +17,7 @@ import { User } from '../ngDBModels'
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private authService: AuthService, private web3S: Web3ServiceService) { }
 
   ngOnInit() {
     this.createForm();
@@ -34,7 +35,8 @@ export class RegistrationComponent implements OnInit {
       reemail : ['', Validators.required],
       pwd : ['', Validators.required],
       dob : ['', Validators.required],
-      gender : ['']
+      gender : [''],
+      userId : ['', Validators.required]
     });
   }
 
@@ -49,6 +51,7 @@ export class RegistrationComponent implements OnInit {
       password : this.registerForm.get('pwd').value,
       dob : this.registerForm.get('dob').value,
       gender : this.registerForm.get('gender').value,
+      userId : this.registerForm.get('userId').value,
       articles : []
     };
     this.authService.register(this.newUser)
@@ -59,6 +62,8 @@ export class RegistrationComponent implements OnInit {
             err => {
               this.message = err.error.msg;
             });
+
+    this.web3S.newUser(this.newUser.name.toString(),this.newUser.email.toString(),this.newUser.userId.toString());
   }
 
 
