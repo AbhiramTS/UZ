@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from '../services/auth.service';
 import { ArticleService } from '../services/article.service';
 
 import { Article } from '../ngDBModels';
@@ -12,7 +13,7 @@ import { Article } from '../ngDBModels';
 export class NewstreamComponent implements OnInit {
   newsStream;
   
-  constructor(private articleService: ArticleService) {
+  constructor(private articleService: ArticleService, private authService: AuthService) {
    }
   ngOnInit() {
     this.articleService.getStream().subscribe((stream: Article[])=>{

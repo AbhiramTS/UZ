@@ -41,15 +41,9 @@ router.get('/getStream', function(req, res) {
   });
 });
 
-
-router.post('/vote', (req, res) => {
+router.post('/voteSet', (req, res) => {
   query = {'artId' : req.body.artId}
-  switch(req.body.updtOpt){ //updtOpt determines up/down vote
-    case 1: update = {$inc: {upVotes : 1 }}; break;
-    case 2: update = {$inc: {upVotes : -1 }}; break;
-    case 3: update = {$inc: {downVotes : 1 }}; break;
-    case 4: update = {$inc: {downVotes : -1 }}; break;
-  }
+  update = {$set: {upVotes :  req.body.upv, downVotes : req.body.downv}};
   Article.findOneAndUpdate(query, update, {new : true}, (err, doc) => {
     if (err) {
         console.log("Something wrong when updating data!");
@@ -57,6 +51,23 @@ router.post('/vote', (req, res) => {
     res.send(doc);
   });
 });
+
+
+// router.post('/vote', (req, res) => {
+//   query = {'artId' : req.body.artId}
+//   switch(req.body.updtOpt){ //updtOpt determines up/down vote
+//     case 1: update = {$inc: {upVotes : 1 }}; break;
+//     case 2: update = {$inc: {upVotes : -1 }}; break;
+//     case 3: update = {$inc: {downVotes : 1 }}; break;
+//     case 4: update = {$inc: {downVotes : -1 }}; break;
+//   }
+//   Article.findOneAndUpdate(query, update, {new : true}, (err, doc) => {
+//     if (err) {
+//         console.log("Something wrong when updating data!");
+//     }
+//     res.send(doc);
+//   });
+// });
 
 
 

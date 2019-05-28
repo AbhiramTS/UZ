@@ -27,9 +27,9 @@ export class ArticleService {
       return response.asObservable();
   }
 
-  voteArticle(vote):Observable<{}>{
+  voteArticle(vote):Observable<{}>{  // vote = { artId: '', upv: , downv: }
     let response = new Subject<{}>();
-    this.http.post(this.url+"/vote", vote)
+    this.http.post(this.url+"/voteSet", vote)
               .subscribe(res=> {
               response.next(res);
             });

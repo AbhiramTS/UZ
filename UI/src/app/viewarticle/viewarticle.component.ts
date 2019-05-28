@@ -14,9 +14,9 @@ export class ViewarticleComponent implements OnInit {
 
   private artLink = "http://localhost:3000/url?link=";
   private article = "Loading...";
-  private upVotes = 154;  // <<   } 
-  private downVotes = 26; // <<     }  TODO: get these details into an Article object and access from it
-  private upVoted = "";   // <<   }
+  private upVotes = 154;  
+  private downVotes = 26; 
+  private upVoted = "";   // <<     }  TODO: get these details into an Article object and access from it
   private downVoted = ""; // << }
   constructor(private http: HttpClient, private route: ActivatedRoute, private authService: AuthService, private router:Router) { 
   }
@@ -41,7 +41,7 @@ export class ViewarticleComponent implements OnInit {
       this.openModal();      
     }
     else{
-      //call the contract function to upvote
+      // TODO: call the contract function to upvote
       this.upVoted = "upvoted";
       this.downVoted = "";
     }
@@ -53,7 +53,7 @@ export class ViewarticleComponent implements OnInit {
       this.openModal(); 
     }
     else{
-      //call the contract function to downvote
+      // TODO: call the contract function to downvote & add voteArticle
       this.upVoted = "";
       this.downVoted = "downvoted";
     }

@@ -24,6 +24,10 @@ export class AuthService {
       return this.currentUserSubject.value;
   }
 
+  getUserDetails(){  // returns the user details stored on localStorage >> name, mail, id(blank as of now), dob, gender
+    return JSON.parse(localStorage.getItem('UZusr'));
+  }
+
 
   login(loginData):Observable<{}>{
     let response = new Subject<{}>();
@@ -32,6 +36,7 @@ export class AuthService {
               .subscribe(res=> {
                 data = res;
                 localStorage.setItem('UZtoken', JSON.stringify(data.token));
+                localStorage.setItem('UZusr', JSON.stringify(data.usrdata));
                 this.currentUserSubject.next(data);              
                 response.next(res);
             });
@@ -50,6 +55,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('UZtoken');
+    localStorage.removeItem('UZusr');
     this.currentUserSubject.next(null);
     this.router.navigate(['/']);
   }
