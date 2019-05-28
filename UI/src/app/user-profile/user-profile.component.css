@@ -20,6 +20,19 @@
     background-color: #45a1cc;
 }
 
+.jumbotron table{
+    width: 60%;
+    border-collapse: separate;
+}
+
+
+.jumbotron table tr td{
+    padding: 15px 20px 15px 20px ;
+}
+
+.jumbotron table tr td
+
+
 .streamCntnr{
     margin-top: 20px;
     width: 94vw;

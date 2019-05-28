@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from '../services/auth.service';
 import { ArticleService } from '../services/article.service';
 
 import { Article } from '../ngDBModels';
@@ -12,7 +13,7 @@ import { Article } from '../ngDBModels';
 export class UserProfileComponent implements OnInit {
 
   newsStream;
-  constructor(private articleService: ArticleService) { 
+  constructor(private authService: AuthService, private articleService: ArticleService) { 
     this.usr = {name : 'Test', userId : 'testId', email : 'test@test.com', dob: new Date('01-01-1970'), gender: 'Male'};
   }
 

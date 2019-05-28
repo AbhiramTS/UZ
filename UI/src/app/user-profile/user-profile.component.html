@@ -5,10 +5,10 @@
       <br>
       <table>
         <tr>
-          <td>{{usr.email}}</td>   <td>{{usr.userId}}</td>
+          <td>Email: </td><td>{{usr.email}}</td>   <td>User Address: </td><td>{{usr.userId}}</td>
         </tr>
         <tr>
-          <td>{{usr.dob}}</td>   <td>{{usr.gender}}</td>
+          <td>Date of Birth: </td><td>{{usr.dob | date: 'MMM - dd - yyyy'}}</td>   <td>Gender: </td><td>{{usr.gender}}</td>
         </tr>
       </table>
     </div>
