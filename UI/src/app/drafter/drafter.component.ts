@@ -36,7 +36,33 @@ export class DrafterComponent implements OnInit {
     });
   }
 
-  publish(){ //UNFINISHED
+  onSubmit(){
+    /* stop here if form is invalid
+    if (this.loginForm.invalid) {
+        return;
+    }*/
+    this.newArticle = { //TODO: get details from templating
+      artId: 'testid',
+      hash: 'testhash',
+      title: 'testTitle',
+      link: 'https://medium.com/front-end-weekly/learn-using-jwt-with-passport-authentication-9761539c4314',
+      author: 'testAuthor',
+      authorId: 'authorID',
+      votes: [],
+      upVotes: 1,
+      downVotes: 0
+    };
+    this.articleService.newArticle(this.newArticle)
+        .subscribe(
+            data => { // 'TODO : prevent redirect and show error msg if failed
+              this.router.navigate(['/']);
+            },
+            err => {
+              this.message = err.error.msg;
+            });
+  }
+
+  publish(){ 
     this.newArticle = {
       artId: 'testid',
       hash: 'testhash',
