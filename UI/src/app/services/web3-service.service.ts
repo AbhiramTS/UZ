@@ -6,7 +6,7 @@ import { hexToNumber } from 'web3-utils';
 
 const Web3 = web3.default;
 
-const MyContractJSON: ContractJSON = require('../../../../truffle/build/contracts/Main.json');
+const MyContractJSON: ContractJSON = require('../../../truffle/build/contracts/Main.json');
 
 // const contractAddress = MyContractJSON.networks['4002'].address;
 const contractAddress = MyContractJSON.networks[4002].address;
