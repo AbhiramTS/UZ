@@ -21,6 +21,7 @@ services:
     depends_on: 
       - 'geth'
       - 'dbcom'
+      - 'tmplt'
 
   geth:
     container_name: geth
@@ -31,6 +32,9 @@ services:
       - '30303:30303'
       - '30303:30303/udp'
     command: --identity "miner" --networkid 4002 --datadir data --port "30303" --rpc --rpcport "8545"  --rpcaddr="0.0.0.0" --rpcvhosts="*" --unlock 0,1,2,3,4  --password password.txt --ipcpath "~/.ethereum/geth.ipc" --rpccorsdomain "*" --rpcapi "db,eth,net,web3,personal" --mine --minerthreads=2
+    depends_on:
+      - 'dbcom'
+      - 'tmplt'
 
   dbcom:
     container_name:  dbcom
@@ -52,3 +56,10 @@ services:
     ports: 
       - '27017:27017'
 
+  tmplt:
+    container_name:  tmplt
+    image: tmplt
+    build: ./tmplt
+    ports:
+      - '3000:3000'
+    command: node app.js
