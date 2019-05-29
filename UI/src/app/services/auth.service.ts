@@ -10,7 +10,7 @@ import { User } from '../ngDBModels';
 })
 export class AuthService {
 
-  private url = "http://127.0.0.1:4000/auth";
+  private url = "/db/auth";
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
   private curUser;

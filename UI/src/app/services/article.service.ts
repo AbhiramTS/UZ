@@ -12,7 +12,7 @@ export class ArticleService {
 
   constructor(private http: HttpClient) { }
 
-  url = "http://127.0.0.1:4000/article";
+  url = "/db/article";
 
   getStream(){
     return this.http.get(this.url+'/getStream');
