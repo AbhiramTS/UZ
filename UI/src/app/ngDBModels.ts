@@ -14,7 +14,9 @@ export class Article
     artId : String;
     hash : String;
     link : String;
+    img: String;
     title : String;
+    text: String;
     author : String;
     authorId : String;
     upVotes : Number;

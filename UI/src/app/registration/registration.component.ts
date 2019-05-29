@@ -71,7 +71,7 @@ export class RegistrationComponent implements OnInit {
       console.log(th); 
      let c = await this.conf(th); 
      if(c) {
-       console.log('cnfrmd');
+       console.log('cnfrmd', this.newUser.userId);
        this.web3S.getUser(this.newUser.userId.toString());
        this.writeToDb(this.newUser);
      }    

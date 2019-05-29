@@ -48,29 +48,33 @@ export class DrafterComponent implements OnInit {
     });
   }
 
-  async onSubmit(e){
-    e.preventDefault();
+  async onSubmit(e, artLink){
+    //e.preventDefault();
     /* stop here if form is invalid
     if (this.loginForm.invalid) {
         return;
     }*/
-    const uID: string = this.usr.getUserDetails();
+    const usr = this.usr.getUserDetails();
     const time: string = Date.toString();
-    const linkTemp = this.link+"url?link="+"artLink"; //To do get Article link
+    const linkTemp = this.link+"url?link="+artLink; //To do get Article link
     const prvw: Preview = await this.template.preview(`${this.link}preview?link=${linkTemp}`);
-    const artId: string = await this.web3.newArticle(prvw.hash,"artLink",uID,time);
+    const artId: string = await this.web3.newArticle(prvw.hash,artLink,usr.userId,time);
+    console.log(artId);
     this.newArticle = {
       artId: artId,
       hash: prvw.hash,
       title: prvw.data.title,
-      link: 'artLink',
-      author: prvw.data.author,
-      authorId: uID,
+      img: prvw.data.image,
+      link: artLink,
+      author: prvw.data.author[0],
+      text: prvw.data.description,
+      authorId: usr.userId,
       votes: [],
       upVotes: 1,
       downVotes: 0
     };
     if(artId !== ''){
+      console.log(this.newArticle, " about to enter into Db");
       this.articleService.newArticle(this.newArticle)
         .subscribe(
             data => { // 'TODO : prevent redirect and show error msg if failed???

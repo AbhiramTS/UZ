@@ -1,6 +1,6 @@
 <div class="streamCntnr">
 
-  <a *ngFor="let article of newsStream" href="http://localhost:4200/viewArticle?link={{article.link}}">
+  <a *ngFor="let article of newsStream" href="http://localhost:4200/viewArticle?artId={{article.artId}}&link={{article.link}}">
     <div class="strmItmCntnr">
       <div class="strmImgCntnr">
         <img [src]="article.img" class="strmImg">
