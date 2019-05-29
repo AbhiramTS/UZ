@@ -11,7 +11,7 @@ router.post('/register', function(req, res) {
       res.json({success: false, msg: 'Please pass all required fields.'});
     } else {
       var newUser = new User({
-        userId : "",
+        userId : req.body.userId,
         name : req.body.name,
         email: req.body.email,
         password: req.body.password,

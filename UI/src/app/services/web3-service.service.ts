@@ -83,8 +83,9 @@ export class Web3ServiceService {
           await this.delay(1000);
           console.log(count++);
         }
+        console.log('newArticle: finished with web3');
       });
-
+      console.log("test");
       return cnfrmd ? article.address : '';
   }
 
@@ -134,5 +135,14 @@ export class Web3ServiceService {
       setTimeout(resolve, ms);
     });
   }
+
+  // d = async (f: boolean) => {
+  //   return new Promise(async (resolve) => {
+  //     while(!f){
+  //       f = await this.transConf(tHash);
+  //     }
+  //     resolve;      
+    // });
+  // }
 
 }

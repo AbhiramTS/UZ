@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http'
 
 import { AuthService } from '../services/auth.service';
 import { Web3ServiceService } from '../services/web3-service.service';
+import { Article } from '../model';
+import { User } from '../ngDBModels';
 
 @Component({
   selector: 'app-viewarticle',
@@ -15,8 +17,9 @@ export class ViewarticleComponent implements OnInit {
 
   private artLink = "http://localhost:3000/url?link=";
   private artId : string;
-  private uID : string;
+  private usr : User;
   private article = "Loading...";
+  private art : Article ;
   private upVotes = 154;  
   private downVotes = 26; 
   private upVoted = "";   // <<     }  TODO: get these details into an Article object and access from it
@@ -32,11 +35,14 @@ export class ViewarticleComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.uID = this.authService.getUserDetails();
+    this.usr = this.authService.getUserDetails();
     this.route.queryParams.subscribe(params => {
+        this.artId = params.artId;
         this.getArticle(params.link);
       });
-    const vote =await this.web3.getVote(this.artId,this.uID);
+    console.log(this.artId);
+    this.art = await this.web3.getArticle(this.artId,this.usr.userId.toString());
+    const vote =await this.web3.getVote(this.artId,this.usr.userId.toString());
     if(vote === 1){
       this.upVoted = 'upvoted';
     }
@@ -59,7 +65,8 @@ export class ViewarticleComponent implements OnInit {
     }
     else{
       // TODO: call the contract function to upvote
-      this.web3.vote(true,this.artId,this.uID);
+      console.log(this.art);
+      this.web3.vote(true,this.artId,this.usr.userId.toString());
       this.upVoted = "upvoted";
       this.downVoted = "";
     }
@@ -72,7 +79,7 @@ export class ViewarticleComponent implements OnInit {
     }
     else{
       // TODO: call the contract function to downvote & add voteArticle
-      this.web3.vote(false,this.artId,this.uID);
+      this.web3.vote(false,this.artId,this.usr.userId.toString());
       this.upVoted = "";
       this.downVoted = "downvoted";
     }
