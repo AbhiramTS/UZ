@@ -9,6 +9,8 @@ import { AuthService } from '../services/auth.service';
 import { Web3ServiceService } from '../services/web3-service.service'
 
 import { User } from '../ngDBModels'
+import { async } from 'q';
+import { on } from 'cluster';
 
 @Component({
   selector: 'app-registration',
@@ -40,7 +42,7 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
-  onSubmit(){
+  async onSubmit(){
     /* stop here if form is invalid
     if (this.loginForm.invalid) {
         return;
@@ -55,7 +57,45 @@ export class RegistrationComponent implements OnInit {
       articles : []
     }; //TODO : insert into blockchain first then do this----|
        //                                                    | 
-    this.authService.register(this.newUser)       //<--------|
+    // this.authService.register(this.newUser)       //<--------|
+    //     .subscribe(
+    //         data => { // 'TODO : prevent redirect and show error msg if failed
+    //           this.router.navigate(['/login']);
+    //         },
+    //         err => {
+    //           this.message = err.error.msg;
+    //         });
+
+    this.web3S.newUser(this.newUser.name.toString(),this.newUser.email.toString(),this.newUser.userId.toString())
+    .on('transactionHash',async (th: string) => {
+      console.log(th); 
+     let c = await this.conf(th); 
+     if(c) {
+       console.log('cnfrmd');
+       this.web3S.getUser(this.newUser.userId.toString());
+       this.writeToDb(this.newUser);
+     }    
+    })
+    .on('receipt', (r) => {
+      console.log(r);
+    })    
+    
+    
+     //TODO: do this before authService.register
+  }
+  conf = async (th: string) => {
+    let cnfrmd : boolean = false;
+    let count = 1;
+      while(!cnfrmd){
+        console.log(count++);
+        cnfrmd = await this.web3S.transConf(th);
+        await this.web3S.delay(1000);
+      }
+      return (cnfrmd);
+  }
+
+  writeToDb = (newUser: User) => {
+    this.authService.register(newUser)
         .subscribe(
             data => { // 'TODO : prevent redirect and show error msg if failed
               this.router.navigate(['/login']);
@@ -63,8 +103,6 @@ export class RegistrationComponent implements OnInit {
             err => {
               this.message = err.error.msg;
             });
-
-    this.web3S.newUser(this.newUser.name.toString(),this.newUser.email.toString(),this.newUser.userId.toString()); //TODO: do this before authService.register
   }
 
 

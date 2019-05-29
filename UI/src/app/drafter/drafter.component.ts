@@ -5,6 +5,10 @@ import { Router } from "@angular/router";
 import { ArticleService } from '../services/article.service';
 
 import { Article } from '../ngDBModels';
+import { TemplatingService } from '../services/templating.service';
+import { Preview } from '../model';
+import { Web3ServiceService } from '../services/web3-service.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-drafter',
@@ -23,43 +27,59 @@ export class DrafterComponent implements OnInit {
   data;
   message = "";
 
-  constructor(private http: HttpClient,  private router: Router, private articleService: ArticleService) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private articleService: ArticleService,
+    private template: TemplatingService,
+    private web3: Web3ServiceService,
+    private usr: AuthService
+  ) { }
 
   ngOnInit() {
   }
 
-  getPreview(artLink){
-    this.http.get(this.link+"url?link="+artLink,{responseType: 'text'}).subscribe((data: any ) => {
+  async getPreview(artLink){
+    const linkTemp = this.link+"url?link="+artLink;
+    this.http.get(this.link+"url?link="+artLink,{responseType: 'text'}).subscribe(async (data: any ) => {
       this.myTmplt = data;
-      this.artHash = "> Pass article hash generated here <";
+      this.artHash = (await this.template.preview(`${this.link}preview?link=${linkTemp}`)).hash;
       this.disablePublish = false;
     });
   }
 
-  onSubmit(){
+  async onSubmit(e){
+    e.preventDefault();
     /* stop here if form is invalid
     if (this.loginForm.invalid) {
         return;
     }*/
-    this.newArticle = { //TODO: get details from templating
-      artId: 'testid',
-      hash: 'testhash',
-      title: 'testTitle',
-      link: 'https://medium.com/front-end-weekly/learn-using-jwt-with-passport-authentication-9761539c4314',
-      author: 'testAuthor',
-      authorId: 'authorID',
+    const uID: string = this.usr.getUserDetails();
+    const time: string = Date.toString();
+    const linkTemp = this.link+"url?link="+"artLink"; //To do get Article link
+    const prvw: Preview = await this.template.preview(`${this.link}preview?link=${linkTemp}`);
+    const artId: string = await this.web3.newArticle(prvw.hash,"artLink",uID,time);
+    this.newArticle = {
+      artId: artId,
+      hash: prvw.hash,
+      title: prvw.data.title,
+      link: 'artLink',
+      author: prvw.data.author,
+      authorId: uID,
       votes: [],
       upVotes: 1,
       downVotes: 0
     };
-    this.articleService.newArticle(this.newArticle)
+    if(artId !== ''){
+      this.articleService.newArticle(this.newArticle)
         .subscribe(
-            data => { // 'TODO : prevent redirect and show error msg if failed
+            data => { // 'TODO : prevent redirect and show error msg if failed???
               this.router.navigate(['/']);
             },
             err => {
               this.message = err.error.msg;
             });
+    }
   }
 
  

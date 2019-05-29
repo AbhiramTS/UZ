@@ -12,7 +12,7 @@ contract voting is AccountManagment, Sqrt{
 
     mapping (address => votes[]) public artVotes;
 
-    function voteArticle(bool _up, address payable _artAddress) public payable{
+    function voteArticle(bool _up, address  _artAddress) public {
         bool found;
         if(_up){
             for(uint i = 0; i < artVotes[_artAddress].length; i++)
@@ -34,6 +34,7 @@ contract voting is AccountManagment, Sqrt{
                 artVotes[_artAddress].push(votes(msg.sender, true));
                 art[_artAddress].uVote += 1;
             }
+            art[_artAddress].artVotes[msg.sender] = vote.UP;
         }
         else{
             for(uint i = 0; i < artVotes[_artAddress].length; i++)
@@ -55,6 +56,7 @@ contract voting is AccountManagment, Sqrt{
                 artVotes[_artAddress].push(votes(msg.sender, false));
                 art[_artAddress].dVote += 1;
             }
+            art[_artAddress].artVotes[msg.sender] = vote.DOWN;
         }
         updateRanking(_artAddress);
     }

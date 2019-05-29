@@ -15,8 +15,6 @@ contract AccountManagment is Permission, Vote{
     struct myUser{
         string name;
         string email;
-        mapping (address => vote) myVotes;
-        address[] artReg;
     }
     mapping (address => myUser) usr;
 
@@ -29,6 +27,7 @@ contract AccountManagment is Permission, Vote{
         int64 aRank;
         int64 uVote;
         int64 dVote;
+        mapping (address => vote) artVotes;
     }
     mapping (address => myArticle) public art;
     function newUser(address _uid, string memory _name, string memory _email) public  {
@@ -45,12 +44,10 @@ contract AccountManagment is Permission, Vote{
     }
     function getUser(address _userAddress) public view returns(
         string memory name,
-        string memory email,
-        address[] memory voteReg
+        string memory email
     ) {
         name = usr[_userAddress].name;
         email = usr[_userAddress].email;
-        voteReg = usr[_userAddress].artReg;
     }
     function getArticle(address _artid) public view returns(
        string memory _artHash,
@@ -71,7 +68,7 @@ contract AccountManagment is Permission, Vote{
         _uVote = art[_artid].uVote;
         _dVote = art[_artid].dVote;
     }
-     function getVote(address _artId, address _userId) public view returns(vote _artVote) {
-        _artVote = usr[_userId].myVotes[_artId];
+function getVote(address _artId) public view returns(vote _artVote) {
+        _artVote = art[_artId].artVotes[msg.sender];
     }
 }
