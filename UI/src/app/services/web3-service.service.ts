@@ -3,6 +3,8 @@ import * as web3 from 'web3';
 import {Subject} from 'rxjs';
 import { ContractJSON, Acnt, Article } from '../model'
 import { hexToNumber } from 'web3-utils';
+import { async } from '@angular/core/testing';
+import { count } from 'rxjs/operators';
 
 const Web3 = web3.default;
 
@@ -68,17 +70,26 @@ export class Web3ServiceService {
     return article;
   }
 
-  newArticle = ( artHash: string, link: string, userAddress: string, time: string) => {
+  newArticle = async ( artHash: string, link: string, userAddress: string, time: string) => {
+    let cnfrmd: boolean = false;
     let article: Acnt = this.myWeb3.eth.accounts.create(this.myWeb3.utils.randomHex(32));
-    this.UZ.methods.newArticle(article.address, artHash, link, userAddress, userAddress, time)
-      .send({from: userAddress, gas: 6000000});
+    await this.UZ.methods.newArticle(article.address, artHash, link, userAddress, userAddress, time)
+      .send({from: userAddress, gas: 6000000})
+      .on('transactionHash', async (tHash: string) => {
+        console.log(tHash);
+        let count = 1;
+        while(!cnfrmd){
+          cnfrmd =await this.transConf(tHash);
+          await this.delay(1000);
+          console.log(count++);
+        }
+      });
+
+      return cnfrmd ? article.address : '';
   }
 
-  newUser = ( name: string, emai: string, userAddress: string) => {
-    this.UZ.methods.newUser(userAddress, name, emai).send({from: userAddress, gas: 6000000}).then( v => {
-      console.log(v);
-      this.getUser(userAddress);
-    });
+  newUser =  ( name: string, emai: string, userAddress: string) => {
+    return this.UZ.methods.newUser(userAddress, name, emai).send({from: userAddress, gas: 6000000});
   }
 
   getUser = (userAddress: string) => {
@@ -87,7 +98,41 @@ export class Web3ServiceService {
     });
   }
 
-  vote = (vote: Boolean, artAddress: string, userAddress: string) => {
-    this.UZ.methods.voteArticle(vote, artAddress).send({from: userAddress, gas: 6000000});
+  vote = async (vote: Boolean, artAddress: string, userAddress: string) => {
+    let cnfrmd: boolean = false;
+    await this.UZ.methods.voteArticle(vote, artAddress).send({from: userAddress.toString(), gas: 6000000})
+    .on('transactionHash', async (tHash: string) => {
+      console.log(tHash);
+      let count = 1;
+      while(!cnfrmd){
+        cnfrmd =await this.transConf(tHash);
+        await this.delay(1000);
+        console.log(count++);
+      }
+    });
+    return cnfrmd;
   }
+
+  getVote = async (artAddress: string, userAddress: String) => {
+    const myVote: number = await this.UZ.methods.getVote(artAddress).call({from: userAddress});
+    return myVote;
+  }
+
+  transConf = async (tranHash : string) : Promise<boolean> => {
+    try{
+      const tresp = await this.myWeb3.eth.getTransaction(tranHash);
+      return tresp.blockNumber === null ? false : true;
+    }
+    catch(e){
+      console.log(e);
+      return false;
+    }
+  }
+
+  delay = async (ms: number) => {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+
 }

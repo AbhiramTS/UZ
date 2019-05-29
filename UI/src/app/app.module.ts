@@ -9,6 +9,7 @@ import { AccountComponent } from './account/account.component';
 
 import { Web3ServiceService } from './services/web3-service.service';
 import { AuthService } from './services/auth.service';
+import { TemplatingService } from './services/templating.service';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -43,7 +44,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
   ],
   providers: [
     Web3ServiceService,
-    AuthService
+    AuthService,
+    TemplatingService
   ],
   bootstrap: [AppComponent]
 })
