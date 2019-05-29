@@ -7,7 +7,8 @@ RUN apt-get update \
     && apt-get install -y nginx \
     && apt-get install build-essential
 
-RUN npm install -g @angular/cli 
+RUN npm install -g @angular/cli \
+&& npm install -g truffle
 
 RUN mkdir -p /usr/share/workdir/UI/src \
     && mkdir -p /usr/share/workdir/UI/truffle

@@ -49,7 +49,7 @@ module.exports = {
     //   gas: 6283185
     //  },
     development: {
-      host: "127.0.0.1",
+      host: "geth",
       port: 8545,
       network_id: "4002",
       gas: 6283185

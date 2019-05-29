@@ -9,9 +9,6 @@ services:
     container_name: frontEnd
     image: front-end
     build: ./UI
-    # build:
-    #   context: .
-    #   dockerfile: ./UI/Dockerfile
     ports:
       - '4200:4200'
       - '80:80'
@@ -19,4 +16,17 @@ services:
       - './UI/src:/usr/share/workdir/UI/src'
       - './UI/truffle:/usr/share/workdir/UI/truffle'
 
-    command: bash -c "ls && node patch.js && ng build && cp nginx.conf /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+    command: bash -c "ls && (cd ./truffle && rm -r ./build  && truffle migrate --force) && node patch.js && ng build && cp nginx.conf /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+    # command: bash -c "ls && (cd ./truffle && rm -r ./build  && truffle compile) && node patch.js && ng build && cp nginx.conf /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+    depends_on: 
+      - 'geth'
+
+  geth:
+    container_name: geth
+    image: geth
+    build: ./geth
+    ports:
+      - '8545:8545'
+      - '30303:30303'
+      - '30303:30303/udp'
+    command: --identity "miner" --networkid 4002 --datadir data --port "30303" --rpc --rpcport "8545"  --rpcaddr="0.0.0.0" --rpcvhosts="*" --unlock 0,1,2,3,4  --password password.txt --ipcpath "~/.ethereum/geth.ipc" --rpccorsdomain "*" --rpcapi "db,eth,net,web3,personal" --mine --minerthreads=2
