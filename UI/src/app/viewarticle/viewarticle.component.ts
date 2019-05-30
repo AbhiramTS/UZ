@@ -99,23 +99,20 @@ export class ViewarticleComponent implements OnInit {
       } 
       else if(this.downVoted == "downvoted"){
         opt = 5;   //earlier downvoted -> change to upvote
-        this.upVoted = "upvoted";
-        this.downVoted = "";
+        this.upVoted = "unfinishedUp";
       } 
       else{
         opt = 1;   //upvote
-        this.upVoted = "upvoted";
-        this.downVoted = "";
+        this.upVoted = "unfinishedUp";
       } 
       this.web3.vote(true,this.artId,this.usr.userId.toString()).then(()=>{
         this.articleService.voteArticle({artId: this.artId, updtOpt: opt}).subscribe((art)=>{
           this.articleFromDB = art;
           this.checkVotedOrNot();
+          this.art = this.web3.getArticle(this.artId,this.usr.userId.toString());
         });
         console.log(this.articleFromDB);
       });
-      this.upVoted = "upvoted";
-      this.downVoted = "";
     }
   }
 
@@ -134,23 +131,20 @@ export class ViewarticleComponent implements OnInit {
       } 
       else if(this.upVoted == "upvoted"){
         opt = 6;       //earlier upvoted -> change to downvote
-        this.upVoted = "";
-        this.downVoted = "downvoted";
+        this.downVoted = "unfinishedDown";
       }
       else{
         opt = 2;       //downvote
-        this.upVoted = "";
-        this.downVoted = "downvoted";
+        this.downVoted = "unfinishedDown";
       }
       this.web3.vote(false,this.artId,this.usr.userId.toString()).then(()=>{
         this.articleService.voteArticle({artId: this.artId, updtOpt: opt}).subscribe((art)=>{
           this.articleFromDB = art;
           this.checkVotedOrNot();
+          this.art = this.web3.getArticle(this.artId,this.usr.userId.toString());
         });
         console.log(this.articleFromDB);
       });
-      this.upVoted = "";
-      this.downVoted = "downvoted";
     }
   }
 

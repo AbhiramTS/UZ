@@ -13,7 +13,7 @@ let Article = new Schema({
     text : { type : String},
     upVotes : {type : Number},
     downVotes : {type : Number},
-    votes : [{
+    votes : [{ //unused
                     user : {type : String},
                     value : {type : Number}
                 }]

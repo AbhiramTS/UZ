@@ -87,3 +87,26 @@
     border-color: #a31212 transparent transparent transparent;
     color: #fff;
 }
+
+.unfinishedUp{
+    border-color: transparent transparent #c0cc19 transparent;
+    color: #000;
+}
+
+.unfinishedDown{
+    border-color: #c0cc19 transparent transparent transparent;
+    color: #000;
+}
+
+.rankBox{
+    height: 38px;
+    width: 100%;
+    background: #52b0cc;
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.rankNum{
+    color: #944343;
+}
