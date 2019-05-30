@@ -2,3 +2,6 @@
 package-lock.json
 **/chaindata
 **/nodes
+**/build
+**/dist
+mongo/data

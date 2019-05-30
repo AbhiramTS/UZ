@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="form_container row">
+        <div class="login_card">
+          <div class="reg_tbl_container">
+            <h3>Login</h3><br>
+            <form class="form-signin" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+              <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{message}}
+              </div>
+              <div class="form-group">
+                <label for="email">Email address:</label>
+                <input type="text" class="form-control" [(ngModel)]="loginData.email" name="email" required/>
+              </div>
+              <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" [(ngModel)]="loginData.pwd" name="pwd" required/>
+              </div>
+              <div class="form-group form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox"> Remember me*
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid">Login</button>
+            </form>
+            <!--
+            <div class="or_divider"> OR </div>
+              <a class="google-btn" href="/auth/google">
+                  <div class='g-sign-in-button'>
+                      <div class=content-wrapper>
+                      <div class='logo-wrapper'>  
+                          <img src='http://www.stickpng.com/assets/images/5847f9cbcef1014c0b5e48c8.png'>
+                          </div>  
+                          <span class='text-container'> 
+                          <span>Sign in with Google</span>
+                          </span>
+                      </div>  
+                  </div> 
+              </a>-->
+              <br>
+            Not a member? <a [routerLink]="['/register']">Signup here</a>
+          </div>  
+        </div>
+      </div>
+</div>

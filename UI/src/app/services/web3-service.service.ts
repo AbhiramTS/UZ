@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 import * as web3 from 'web3';
 import {Subject} from 'rxjs';
-import { maybeQueueResolutionOfComponentResources } from '@angular/core/src/metadata/resource_loading';
+import { ContractJSON, Acnt, Article } from '../model'
+import { hexToNumber } from 'web3-utils';
+import { async } from '@angular/core/testing';
+import { count } from 'rxjs/operators';
+
+import { ArticleService } from './article.service';
 
 const Web3 = web3.default;
 
-const MyContractJSON = require('../../../../truffle/build/contracts/Main.json');
+const MyContractJSON: ContractJSON = require('../../../truffle/build/contracts/Main.json');
 
 // const contractAddress = MyContractJSON.networks['4002'].address;
-const contractAddress = "0x3b1b2604f8a9bd987ebf2e7793182e3138f9ef23";
+const contractAddress = MyContractJSON.networks[4002].address;
 const abi = MyContractJSON.abi;
 const web3Provider =new Web3.providers.HttpProvider("http://127.0.0.1:8545");
 
@@ -24,19 +29,20 @@ export class Web3ServiceService {
   public myAccounts: string[] = [];
   public myAccountsObservable = new Subject<String[]>();
   
-  constructor() {
+  constructor(private articleService: ArticleService) {
     this.startWeb3();
    }
 
   startWeb3 = () => {
     console.info("Starting Web3...");
+    console.log("Contract Address ->",contractAddress);
     this.myWeb3 = new Web3(web3Provider);
     this.UZ = new this.myWeb3.eth.Contract(abi, contractAddress);
     if(!this.myWeb3.eth.net.isListening()){
       console.warn("Couldn't connect to any web3 provider!!!")
       return;
     }
-    setInterval(() => this.getAccounts(), 200);
+    setTimeout(() => this.getAccounts(), 200); // changed to timeout as it was refreshing every 0.2 sec
   };
 
    getAccounts = () => {
@@ -57,4 +63,88 @@ export class Web3ServiceService {
       }
     });
   }
+
+  getArticle = async (artAddress: string, userAddress: string):Promise<Article> => {
+    
+    let article : Article = await this.UZ.methods.getArticle(artAddress).call({from: userAddress}).then((v: Article) => {
+      return v;
+    });
+    return article;
+  }
+
+  newArticle = async ( artHash: string, link: string, userAddress: string, time: string) => {
+    let cnfrmd: boolean = false;
+    let article: Acnt = this.myWeb3.eth.accounts.create(this.myWeb3.utils.randomHex(32));
+    await this.UZ.methods.newArticle(article.address, artHash, link, userAddress, userAddress, time)
+      .send({from: userAddress, gas: 6000000})
+      .on('transactionHash', async (tHash: string) => {
+        console.log(tHash);
+        let count = 1;
+        while(!cnfrmd){
+          cnfrmd =await this.transConf(tHash);
+          await this.delay(1000);
+          console.log(count++);
+        }
+        console.log('newArticle: finished with web3');
+      });
+      console.log("test");
+      return cnfrmd ? article.address : '';
+  }
+
+  newUser =  ( name: string, emai: string, userAddress: string) => {
+    return this.UZ.methods.newUser(userAddress, name, emai).send({from: userAddress, gas: 6000000});
+  }
+
+  getUser = (userAddress: string) => {
+    this.UZ.methods.getUser(userAddress).call({from: userAddress}).then((v) => {
+      console.log(v);
+    });
+  }
+
+  vote = async (vote: Boolean, artAddress: string, userAddress: string) => {
+    let cnfrmd: boolean = false;
+    await this.UZ.methods.voteArticle(vote, artAddress).send({from: userAddress.toString(), gas: 6000000})
+    .on('transactionHash', async (tHash: string) => {
+      console.log(tHash);
+      let count = 1;
+      while(!cnfrmd){
+        cnfrmd =await this.transConf(tHash);
+        await this.delay(1000);
+        console.log(count++);
+      }
+    });
+    return cnfrmd;
+  }
+
+  getVote = async (artAddress: string, userAddress: String) => {
+    const myVote: number = await this.UZ.methods.getVote(artAddress).call({from: userAddress});
+    return myVote;
+  }
+
+  transConf = async (tranHash : string) : Promise<boolean> => {
+    try{
+      const tresp = await this.myWeb3.eth.getTransaction(tranHash);
+      return tresp.blockNumber === null ? false : true;
+    }
+    catch(e){
+      console.log(e);
+      return false;
+    }
+  }
+
+  delay = async (ms: number) => {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+
+  // d = async (f: boolean) => {
+  //   return new Promise(async (resolve) => {
+  //     while(!f){
+  //       f = await this.transConf(tHash);
+  //     }
+  //     resolve;      
+    // });
+  // }
+
 }

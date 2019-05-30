@@ -1,0 +1,34 @@
+<div class="proflCntnr">
+  <div class="jumbotron">
+    <div class="page-header">
+      <h1>{{usr.name}}</h1>
+      <br>
+      <table>
+        <tr>
+          <td>Email: </td><td>{{usr.email}}</td>   <td>User Address: </td><td>{{usr.userId}}</td>
+        </tr>
+        <tr>
+          <td>Date of Birth: </td><td>{{usr.dob | date: 'MMM - dd - yyyy'}}</td>   <td>Gender: </td><td>{{usr.gender}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <a *ngFor="let article of newsStream" [href]="article.link">
+    <div class="strmItmCntnr">
+      <div class="strmImgCntnr">
+        <img [src]="article.img" class="strmImg">
+      </div>
+      <div class="strmTxtCntnr greyTxt">
+        <h4>{{article.title}}</h4>
+        <h6>Author: <a routerLink="/profile/{{article.authorId}}">{{article.author}}</a></h6>
+        <p>	{{article.text}}
+        </p>
+      </div>
+      
+    </div>
+  </a>
+        
+        
+    
+</div>

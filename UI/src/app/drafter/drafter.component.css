@@ -1,0 +1,24 @@
+.draftCntnr{
+    margin-top: 30px;
+    height: 10vh;
+}
+
+.artPreviewCntnr{
+    width: 70vw;
+    height: 70vh;
+    background: aliceblue;
+    border: #007bff 4px dashed;
+    margin-left: auto;
+    margin-right: auto; 
+    overflow-y: scroll;
+}
+
+.draftPrvwPlaceholder{
+    font-size: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin: 0;
+    position: relative;
+    text-align: center;
+    top: 45%;                        
+}
