@@ -6,37 +6,37 @@ import './Sqrt.sol';
 contract voting is AccountManagment, Sqrt{
 
     function voteArticle(bool _up, address  _artAddress) public {
-        if(_up){
-            if(art[_artAddress].artVotes[msg.sender] == vote.DEFAULT){
-                art[_artAddress].artVotes[msg.sender] = vote.UP;
-                art[_artAddress].uVote += 1;
+        if(_up){                                                             //upvote clicked
+            if(art[_artAddress].artVotes[msg.sender] == vote.DEFAULT){          // if( neither Up nor down voted )
+                art[_artAddress].artVotes[msg.sender] = vote.UP;                    // set vote to UP in mapping art(user_address -> vote)
+                art[_artAddress].uVote += 1;                                        // increment upVote count
             }
-            else if(art[_artAddress].artVotes[msg.sender] == vote.DOWN){
-                art[_artAddress].artVotes[msg.sender] = vote.UP;
-                art[_artAddress].uVote += 1;
-                art[_artAddress].dVote -= 1;
+            else if(art[_artAddress].artVotes[msg.sender] == vote.DOWN){        // if( down voted earlier )
+                art[_artAddress].artVotes[msg.sender] = vote.UP;                    // set vote to UP in mapping art(user_address -> vote)
+                art[_artAddress].uVote += 1;                                        // increment upVote count
+                art[_artAddress].dVote -= 1;                                        // decrement downVote count
             }
-            else if(art[_artAddress].artVotes[msg.sender] == vote.UP){
-                art[_artAddress].artVotes[msg.sender] = vote.DEFAULT;
-                art[_artAddress].uVote -= 1;
-            }
-        }
-        else{
-            if(art[_artAddress].artVotes[msg.sender] == vote.DEFAULT){
-                art[_artAddress].artVotes[msg.sender] = vote.DOWN;
-                art[_artAddress].dVote += 1;
-            }
-            else if(art[_artAddress].artVotes[msg.sender] == vote.UP){
-                art[_artAddress].artVotes[msg.sender] = vote.DOWN;
-                art[_artAddress].uVote -= 1;
-                art[_artAddress].dVote += 1;
-            }
-            else if(art[_artAddress].artVotes[msg.sender] == vote.DOWN){
-                art[_artAddress].artVotes[msg.sender] = vote.DEFAULT;
-                art[_artAddress].dVote -= 1;
+            else if(art[_artAddress].artVotes[msg.sender] == vote.UP){          // if( already upvoted )
+                art[_artAddress].artVotes[msg.sender] = vote.DEFAULT;               // set vote to DEFAULT (cancelled vote) in mapping art(user_address -> vote)
+                art[_artAddress].uVote -= 1;                                        // decrement upVote count
             }
         }
-        updateRanking(_artAddress);
+        else{                                                               //downvote clicked
+            if(art[_artAddress].artVotes[msg.sender] == vote.DEFAULT){          // if( neither Up nor down voted )
+                art[_artAddress].artVotes[msg.sender] = vote.DOWN;                  // set vote to DOWN in mapping art(user_address -> vote)
+                art[_artAddress].dVote += 1;                                        // increment upVote count
+            }
+            else if(art[_artAddress].artVotes[msg.sender] == vote.UP){          // if( up voted earlier )
+                art[_artAddress].artVotes[msg.sender] = vote.DOWN;                  // set vote to DOWN in mapping art(user_address -> vote)
+                art[_artAddress].uVote -= 1;                                        // decrement upVote count
+                art[_artAddress].dVote += 1;                                        // increment downVote count
+            }
+            else if(art[_artAddress].artVotes[msg.sender] == vote.DOWN){        // if( already downvoted )
+                art[_artAddress].artVotes[msg.sender] = vote.DEFAULT;               // set vote to DEFAULT (cancelled vote) in mapping art(user_address -> vote)
+                art[_artAddress].dVote -= 1;                                        // decrement downVote count
+            }
+        }
+        updateRanking(_artAddress);         // update articles ranking
     }
 
     function updateRanking(address _artAddress) public{
