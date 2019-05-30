@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { ArticleService } from '../services/article.service';
 
 import { Article } from '../ngDBModels';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,12 +14,15 @@ import { Article } from '../ngDBModels';
 export class UserProfileComponent implements OnInit {
 
   newsStream;
-  constructor(private authService: AuthService, private articleService: ArticleService) { 
+  constructor(private authService: AuthService, private articleService: ArticleService, private route: ActivatedRoute,) { 
     this.usr = {name : 'Test', userId : 'testId', email : 'test@test.com', dob: new Date('01-01-1970'), gender: 'Male'};
   }
 
   usr;
   ngOnInit() {
+    this.authService.getProfile(this.route.snapshot.params.id).subscribe((usr)=>{
+      this.usr = usr;
+    });
     this.articleService.getStream().subscribe((stream: Article[])=>{ //TODO: get articles of this user
     this.newsStream = stream;
     });

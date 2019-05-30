@@ -38,8 +38,12 @@
 
 .upNum{
     position: relative;
-    top: 58px;
-    left: -15px;
+    top: 56px;
+    left: -23px;
+    height: 34px;
+    width: 48px;
+    text-align: center;
+    /* background: bisque; */
     font-weight: bold;
 }
 
@@ -62,7 +66,11 @@
 .downNum{
     position: relative;
     top: -84px;
-    left: -8px;
+    left: -24px;
+    height: 34px;
+    width: 48px;
+    text-align: center;
+    /* background: bisque; */
     font-weight: bold;
 }
 
@@ -78,4 +86,27 @@
 .downvoted{
     border-color: #a31212 transparent transparent transparent;
     color: #fff;
+}
+
+.unfinishedUp{
+    border-color: transparent transparent #c0cc19 transparent;
+    color: #000;
+}
+
+.unfinishedDown{
+    border-color: #c0cc19 transparent transparent transparent;
+    color: #000;
+}
+
+.rankBox{
+    height: 38px;
+    width: 100%;
+    background: #52b0cc;
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.rankNum{
+    color: #944343;
 }

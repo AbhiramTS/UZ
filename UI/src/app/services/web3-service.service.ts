@@ -6,6 +6,8 @@ import { hexToNumber } from 'web3-utils';
 import { async } from '@angular/core/testing';
 import { count } from 'rxjs/operators';
 
+import { ArticleService } from './article.service';
+
 const Web3 = web3.default;
 
 const MyContractJSON: ContractJSON = require('../../../truffle/build/contracts/Main.json');
@@ -27,7 +29,7 @@ export class Web3ServiceService {
   public myAccounts: string[] = [];
   public myAccountsObservable = new Subject<String[]>();
   
-  constructor() {
+  constructor(private articleService: ArticleService) {
     this.startWeb3();
    }
 

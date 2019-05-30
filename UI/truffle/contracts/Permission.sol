@@ -34,10 +34,10 @@ contract Permission{
         require(isUser(msg.sender),"Can only be accessed by user!!!");
         _;
     }
-    function addNode(address _temp) public onlyUser {
+    function addNode(address _temp) public onlyUser {       //unused
         node[_temp] = true;
     }
-    function addPublisher(address _temp) public onlyUser {
+    function addPublisher(address _temp) public onlyUser {  //unused
         publisher[_temp] = true;
     }
     function addArticle(address _temp) public onlyUser {

@@ -60,6 +60,17 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
+  getProfile(usrId):Observable<{}>{
+    let response = new Subject<{}>();
+    let data;
+    this.http.get(this.url+'/getProfile')
+              .subscribe(res=> {
+                data = res;              
+                response.next(res);
+            });
+      return response.asObservable();
+  }
+
 
 
 
