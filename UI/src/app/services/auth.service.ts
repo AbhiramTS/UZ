@@ -63,7 +63,7 @@ export class AuthService {
   getProfile(usrId):Observable<{}>{
     let response = new Subject<{}>();
     let data;
-    this.http.post(this.url+'/getProfile',usrId)
+    this.http.get(this.url+'/getProfile')
               .subscribe(res=> {
                 data = res;              
                 response.next(res);
