@@ -4,8 +4,8 @@
 
 ## Getting started
 
-```
-git clone https://github.com/Kerala-Blockchain-Academy/docver
+```bash
+git clone https://gitlab.com/abhiramts007/unmaizeithi
 sudo docker-compose up
 ```
 
