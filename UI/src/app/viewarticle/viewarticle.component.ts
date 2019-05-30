@@ -53,9 +53,11 @@ export class ViewarticleComponent implements OnInit {
     const vote =await this.web3.getVote(this.artId,this.usr.userId.toString());
     if(vote === 1){
       this.upVoted = 'upvoted';
+      this.downVoted = '';
     }
     if(vote === 2){
       this.downVoted = 'downvoted';
+      this.upVoted = '';
     }
   }
 
@@ -70,9 +72,15 @@ export class ViewarticleComponent implements OnInit {
     let vote = await this.web3.getVote(this.artId,this.usr.userId.toString());
     if(vote === 1){
       this.upVoted = 'upvoted';
+      this.downVoted = '';
     }
-    if(vote === 2){
+    else if(vote === 2){
       this.downVoted = 'downvoted';
+      this.upVoted = '';
+    }
+    else{
+      this.upVoted = '';
+      this.downVoted = '';
     }
   }
 
@@ -84,9 +92,21 @@ export class ViewarticleComponent implements OnInit {
     else{
       // TODO: call the contract function to upvote
       let opt;
-      if(this.upVoted == "upvoted") opt = 2;            //already upvoted -> cancel upvote
-      else if(this.downVoted == "downvoted") opt = 5;   //earlier downvoted -> change to upvote
-      else opt = 1;                                     //upvote
+      if(this.upVoted == "upvoted"){
+        opt = 2;    //already upvoted -> cancel upvote
+        this.upVoted = "";
+        this.downVoted = "";
+      } 
+      else if(this.downVoted == "downvoted"){
+        opt = 5;   //earlier downvoted -> change to upvote
+        this.upVoted = "upvoted";
+        this.downVoted = "";
+      } 
+      else{
+        opt = 1;   //upvote
+        this.upVoted = "upvoted";
+        this.downVoted = "";
+      } 
       this.web3.vote(true,this.artId,this.usr.userId.toString()).then(()=>{
         this.articleService.voteArticle({artId: this.artId, updtOpt: opt}).subscribe((art)=>{
           this.articleFromDB = art;
@@ -107,9 +127,21 @@ export class ViewarticleComponent implements OnInit {
     else{
       // TODO: call the contract function to downvote & add voteArticle
       let opt;
-      if(this.downVoted == "downvoted") opt = 4;        //already downvoted -> cancel downvote
-      else if(this.upVoted == "upvoted") opt = 6;       //earlier upvoted -> change to downvote
-      else opt = 2;                                     //downvote
+      if(this.downVoted == "downvoted"){
+        opt = 4;        //already downvoted -> cancel downvote
+        this.upVoted = "";
+        this.downVoted = "";
+      } 
+      else if(this.upVoted == "upvoted"){
+        opt = 6;       //earlier upvoted -> change to downvote
+        this.upVoted = "";
+        this.downVoted = "downvoted";
+      }
+      else{
+        opt = 2;       //downvote
+        this.upVoted = "";
+        this.downVoted = "downvoted";
+      }
       this.web3.vote(false,this.artId,this.usr.userId.toString()).then(()=>{
         this.articleService.voteArticle({artId: this.artId, updtOpt: opt}).subscribe((art)=>{
           this.articleFromDB = art;

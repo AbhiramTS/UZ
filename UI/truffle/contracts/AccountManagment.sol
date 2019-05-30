@@ -68,7 +68,5 @@ contract AccountManagment is Permission, Vote{
         _uVote = art[_artid].uVote;
         _dVote = art[_artid].dVote;
     }
-function getVote(address _artId) public view returns(vote _artVote) {
-        _artVote = art[_artId].artVotes[msg.sender];
-    }
+
 }

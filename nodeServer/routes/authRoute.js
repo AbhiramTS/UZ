@@ -55,6 +55,21 @@ router.post('/register', function(req, res) {
     });
   });
 
+  router.get('/getProfile', function(req, res) {
+    User.findOne({
+      artId: req.query.artId
+    }, function(err, user) {
+      if (err) throw err;
+  
+      if (!user) {
+        res.status(401).send({success: false, msg: 'Could not find user'});
+      } else {
+        userData = {name: user.name, userId: user.userId, email: user.email, dob: user.dob, gender: user.gender};
+        res.send(userData);
+      }
+    });
+  });
+
   getToken = function (headers) {
     if (headers && headers.authorization) {
       var parted = headers.authorization.split(' ');
