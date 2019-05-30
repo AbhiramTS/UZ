@@ -38,8 +38,12 @@
 
 .upNum{
     position: relative;
-    top: 58px;
-    left: -15px;
+    top: 56px;
+    left: -23px;
+    height: 34px;
+    width: 48px;
+    text-align: center;
+    /* background: bisque; */
     font-weight: bold;
 }
 
@@ -62,7 +66,11 @@
 .downNum{
     position: relative;
     top: -84px;
-    left: -8px;
+    left: -24px;
+    height: 34px;
+    width: 48px;
+    text-align: center;
+    /* background: bisque; */
     font-weight: bold;
 }
 

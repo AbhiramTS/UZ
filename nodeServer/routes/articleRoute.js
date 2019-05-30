@@ -4,12 +4,12 @@ const Article = require('../models/article');
 
 
 router.post('/submit', function(req, res) {
-  if (!req.body) { //CHANGE PARAMETERS HERE
+  if (!req.body) { 
     res.json({success: false, msg: 'Please pass all required fields.'});
   } else {
     var newArticle = new Article({
-      artId : req.body.artId,        //GET FROM W3
-      hash : req.body.hash,             //GET FROM W3
+      artId : req.body.artId,        
+      hash : req.body.hash,             
       link : req.body.link,
       title: req.body.title,
       author: req.body.author,
@@ -41,9 +41,29 @@ router.get('/getStream', function(req, res) {
   });
 });
 
-router.post('/voteSet', (req, res) => {
+
+router.get('/getArticle', function(req, res) {
+  Article.findOne({artId: req.query.artId},(err, article)=>{
+      if(err){
+          res.json({'Error' : 'Error connecting to DB'});
+      }
+      else{
+          res.json(article);
+      }
+  });
+});
+
+
+router.post('/vote', (req, res) => {
   query = {'artId' : req.body.artId}
-  update = {$set: {upVotes :  req.body.upv, downVotes : req.body.downv}};
+  switch(req.body.updtOpt){ //updtOpt determines up/down vote
+    case 1: update = {$inc: {upVotes : 1 }}; break;                   //upVote
+    case 2: update = {$inc: {upVotes : -1 }}; break;                  //cancel upVote
+    case 3: update = {$inc: {downVotes : 1 }}; break;                 //downVote
+    case 4: update = {$inc: {downVotes : -1 }}; break;                //cancel downVote
+    case 5: update = {$inc: {upVotes : 1, downVotes : -1 }}; break;   //upVote when downvoted
+    case 6: update = {$inc: {upVotes : -1, downVotes : 1 }}; break;   //downVote when upvoted
+  }
   Article.findOneAndUpdate(query, update, {new : true}, (err, doc) => {
     if (err) {
         console.log("Something wrong when updating data!");
@@ -53,14 +73,9 @@ router.post('/voteSet', (req, res) => {
 });
 
 
-// router.post('/vote', (req, res) => {
+// router.post('/voteSet', (req, res) => {
 //   query = {'artId' : req.body.artId}
-//   switch(req.body.updtOpt){ //updtOpt determines up/down vote
-//     case 1: update = {$inc: {upVotes : 1 }}; break;
-//     case 2: update = {$inc: {upVotes : -1 }}; break;
-//     case 3: update = {$inc: {downVotes : 1 }}; break;
-//     case 4: update = {$inc: {downVotes : -1 }}; break;
-//   }
+//   update = {$set: {upVotes :  req.body.upv, downVotes : req.body.downv}};
 //   Article.findOneAndUpdate(query, update, {new : true}, (err, doc) => {
 //     if (err) {
 //         console.log("Something wrong when updating data!");

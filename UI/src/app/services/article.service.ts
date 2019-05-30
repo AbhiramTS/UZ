@@ -27,9 +27,18 @@ export class ArticleService {
       return response.asObservable();
   }
 
-  voteArticle(vote):Observable<{}>{  // vote = { artId: '', upv: , downv: }
+  getArticleFromDB(artId):Observable<{}>{ 
     let response = new Subject<{}>();
-    this.http.post(this.url+"/voteSet", vote)
+    this.http.get(this.url+"/getArticle?artId="+artId)
+              .subscribe(res=> {
+              response.next(res);
+            });
+      return response.asObservable();
+  }
+
+  voteArticle(vote):Observable<{}>{  // vote = { artId: '', updtOpt: 1/2/3/4/5/6 }
+    let response = new Subject<{}>();
+    this.http.post(this.url+"/vote", vote)
               .subscribe(res=> {
               response.next(res);
             });

@@ -9,7 +9,7 @@
 <div class="fdbckBox">
   <a>
     <div class="fdbckBtn upBtn {{upVoted}}" (click)="upVote()">
-      <div class="upNum">{{this.article.upVotes}}</div>
+      <div class="upNum">{{this.articleFromDB.upVotes}}</div>
     </div>
   </a>
 
@@ -17,7 +17,7 @@
 
   <a>
     <div class="fdbckBtn downBtn {{downVoted}}" (click)="downVote()">
-      <div class="downNum">{{this.article.downVotes}}</div>
+      <div class="downNum">{{this.articleFromDB.downVotes}}</div>
     </div>
   </a>
 </div>
