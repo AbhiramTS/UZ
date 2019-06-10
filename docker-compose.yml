@@ -14,9 +14,10 @@ services:
     volumes:
       - './UI/src:/usr/share/workdir/UI/src'
       - './UI/truffle:/usr/share/workdir/UI/truffle'
+      # - /usr/share/workdir/UI/truffle/build
 
-    command: bash -c "ls && (cd ./truffle && rm -r ./build  && truffle migrate --force) && node patch.js && ng build && cp nginx.conf /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
-    # command: bash -c "ls && (cd ./truffle && rm -r ./build  && truffle compile) && node patch.js && ng build && cp nginx.conf /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+    # command: bash -c "ls && (cd ./truffle && rm -r build && truffle migrate --force) && node patch.js && ng build && cp nginx.conf /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+    command: bash -c "ls && (cd ./truffle && ( if [ -d "build" ]; then rm -r build && echo "removing previous build"; fi ) && truffle migrate --force) && node patch.js && ng build && cp nginx.conf /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
     depends_on: 
       - 'geth'
       - 'dbcom'

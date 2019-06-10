@@ -17,8 +17,8 @@
  * phrase from a file you've .gitignored so it doesn't accidentally become public.
  *
  */
-const HDWalletProvider = require("truffle-hdwallet-provider");
-const mnemonic = "unfair another online cost response motion castle clump fortune diary vintage myself";
+// const HDWalletProvider = require("truffle-hdwallet-provider");
+// const mnemonic = "unfair another online cost response motion castle clump fortune diary vintage myself";
 
 // const HDWalletProvider = require('truffle-hdwallet-provider');
 // const infuraKey = "fj4jll3k.....";
@@ -48,20 +48,20 @@ module.exports = {
     //   host: "127.0.0.1",     // Localhost (default: none)
     //   port: 8545,            // Standard Ethereum port (default: none)
     //   network_id: "4002",       // Any network (default: none)
-    //   gas: 6283185
+    //   gas: 62831850
     //  },
     development: {
       host: "geth",
       port: 8545,
       network_id: "4002",
-      gas: 6283185
+      gas: 62831850
     },
-    ropsten: {
-      provider: function() {
-        return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/v3/637f380b05eb4075a578bb8a81d4216e")
-      },
-      network_id: 3
-    },   
+    // ropsten: {
+    //   provider: function() {
+    //     return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/v3/637f380b05eb4075a578bb8a81d4216e")
+    //   },
+    //   network_id: 3
+    // },   
 
     // Another network with more advanced options...
     // advanced: {

@@ -8,7 +8,7 @@ RUN apt-get update \
     && apt-get install build-essential
 
 RUN npm install -g @angular/cli \
-&& npm install -g truffle
+&& npm install -g truffle@5.0.12
 
 RUN mkdir -p /usr/share/workdir/UI/src \
     && mkdir -p /usr/share/workdir/UI/truffle
