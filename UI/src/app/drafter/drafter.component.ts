@@ -9,6 +9,7 @@ import { TemplatingService } from '../services/templating.service';
 import { Preview } from '../model';
 import { Web3ServiceService } from '../services/web3-service.service';
 import { AuthService } from '../services/auth.service';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-drafter',
@@ -58,8 +59,9 @@ export class DrafterComponent implements OnInit {
     const time: string = Date.toString();
     const linkTemp = this.link+"url?link="+artLink; //To do get Article link
     const prvw: Preview = await this.template.preview(`${this.link}preview?link=${linkTemp}`);
-    const artId: string = await this.web3.newArticle(prvw.hash,artLink,usr.userId,time);
-    console.log(artId);
+    const rtrn =  this.web3.newArticle(prvw.hash,artLink,usr.userId,time);
+    const artId = rtrn.artid;
+    
     this.newArticle = {
       artId: artId,
       hash: prvw.hash,
@@ -73,17 +75,38 @@ export class DrafterComponent implements OnInit {
       upVotes: 1,
       downVotes: 0
     };
-    if(artId !== ''){
-      console.log(this.newArticle, " about to enter into Db");
-      this.articleService.newArticle(this.newArticle)
-        .subscribe(
-            data => { // 'TODO : prevent redirect and show error msg if failed???
-              this.router.navigate(['/']);
-            },
-            err => {
-              this.message = err.error.msg;
-            });
-    }
+
+    const tras = await rtrn.function.on('transactionHash', async(th: string) => {
+      console.log(th);
+      let c = await this.conf(th);
+      if(c){
+        this.db();
+      }
+    });
+    console.log(tras);
+  }
+
+  db = () => {
+    console.log(this.newArticle, " about to enter into Db");
+    this.articleService.newArticle(this.newArticle)
+      .subscribe(
+          data => { // 'TODO : prevent redirect and show error msg if failed???
+            this.router.navigate(['/']);
+          },
+          err => {
+            this.message = err.error.msg;
+          });
+  }
+
+  conf = async (th: string) => {
+    let cnfrmd : boolean = false;
+    let count = 1;
+      while(!cnfrmd){
+        console.log(count++);
+        cnfrmd = await this.web3.transConf(th);
+        await this.web3.delay(1000);
+      }
+      return (cnfrmd);
   }
 
  

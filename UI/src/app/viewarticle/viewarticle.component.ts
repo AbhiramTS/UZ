@@ -86,12 +86,10 @@ export class ViewarticleComponent implements OnInit {
 
   upVote(){
     if(!this.authService.currentUserValue){
-      //alert("Login to make upvote/downvote ");
       this.openModal();      
     }
     else{
-      // TODO: call the contract function to upvote
-      let opt;
+      let opt: number;
       if(this.upVoted == "upvoted"){
         opt = 2;    //already upvoted -> cancel upvote
         this.upVoted = "";
@@ -105,25 +103,27 @@ export class ViewarticleComponent implements OnInit {
         opt = 1;   //upvote
         this.upVoted = "unfinishedUp";
       } 
-      this.web3.vote(true,this.artId,this.usr.userId.toString()).then(()=>{
-        this.articleService.voteArticle({artId: this.artId, updtOpt: opt}).subscribe((art)=>{
-          this.articleFromDB = art;
-          this.checkVotedOrNot();
-          this.art = this.web3.getArticle(this.artId,this.usr.userId.toString());
-        });
-        console.log(this.articleFromDB);
+      const vote = this.web3.vote(true,this.artId,this.usr.userId.toString());
+
+      vote.on('transactionHash', async(th: string) => {
+        console.log(th);
+        let c = await this.conf(th);
+        if(c){
+          this.db(opt);
+        }
+      });
+      vote.on('receipt', (r: any) =>{
+        console.log(r);
       });
     }
   }
 
   downVote(){
     if(!this.authService.currentUserValue){
-      //alert("Login to make upvote/downvote ");
       this.openModal(); 
     }
     else{
-      // TODO: call the contract function to downvote & add voteArticle
-      let opt;
+      let opt: number;
       if(this.downVoted == "downvoted"){
         opt = 4;        //already downvoted -> cancel downvote
         this.upVoted = "";
@@ -137,14 +137,28 @@ export class ViewarticleComponent implements OnInit {
         opt = 2;       //downvote
         this.downVoted = "unfinishedDown";
       }
-      this.web3.vote(false,this.artId,this.usr.userId.toString()).then(()=>{
-        this.articleService.voteArticle({artId: this.artId, updtOpt: opt}).subscribe((art)=>{
-          this.articleFromDB = art;
-          this.checkVotedOrNot();
-          this.art = this.web3.getArticle(this.artId,this.usr.userId.toString());
-        });
-        console.log(this.articleFromDB);
+      const vote = this.web3.vote(false,this.artId,this.usr.userId.toString());
+
+      vote.on('transactionHash', async(th: string) => {
+        console.log(th);
+        let c = await this.conf(th);
+        if(c){
+          this.db(opt);
+        }
       });
+      vote.on('receipt', (r: any) =>{
+        console.log(r);
+      });
+
+      
+      // this.web3.vote(false,this.artId,this.usr.userId.toString()).then(()=>{
+      //   this.articleService.voteArticle({artId: this.artId, updtOpt: opt}).subscribe((art)=>{
+      //     this.articleFromDB = art;
+      //     this.checkVotedOrNot();
+      //     this.art = this.web3.getArticle(this.artId,this.usr.userId.toString());
+      //   });
+      //   console.log(this.articleFromDB);
+      // });
     }
   }
 
@@ -158,6 +172,26 @@ export class ViewarticleComponent implements OnInit {
 
   redirectToRegister(){
     this.router.navigate(['/register']);
+  }
+
+  conf = async (th: string) => {
+    let cnfrmd : boolean = false;
+    let count = 1;
+      while(!cnfrmd){
+        console.log(count++);
+        cnfrmd = await this.web3.transConf(th);
+        await this.web3.delay(1000);
+      }
+      return (cnfrmd);
+  }
+
+  db = (opt: number) => {
+    this.articleService.voteArticle({artId: this.artId, updtOpt: opt}).subscribe((art)=>{
+      this.articleFromDB = art;
+      this.checkVotedOrNot();
+      this.art = this.web3.getArticle(this.artId,this.usr.userId.toString());
+    });
+    console.log(this.articleFromDB);
   }
 
 }

@@ -9,5 +9,7 @@ COPY . .
 
 RUN rm -r ./data/geth
 
+RUN ln -s ./data/ethash ~/.ethash
+
 RUN geth --datadir data init genesis.json
 

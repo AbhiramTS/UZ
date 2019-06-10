@@ -17,6 +17,8 @@
  * phrase from a file you've .gitignored so it doesn't accidentally become public.
  *
  */
+const HDWalletProvider = require("truffle-hdwallet-provider");
+const mnemonic = "unfair another online cost response motion castle clump fortune diary vintage myself";
 
 // const HDWalletProvider = require('truffle-hdwallet-provider');
 // const infuraKey = "fj4jll3k.....";
@@ -54,6 +56,12 @@ module.exports = {
       network_id: "4002",
       gas: 6283185
     },
+    ropsten: {
+      provider: function() {
+        return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/v3/637f380b05eb4075a578bb8a81d4216e")
+      },
+      network_id: 3
+    },   
 
     // Another network with more advanced options...
     // advanced: {

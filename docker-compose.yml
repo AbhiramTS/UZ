@@ -26,11 +26,14 @@ services:
     container_name: geth
     image: geth
     build: ./geth
+    volumes:
+      - './geth/data/ethereum/:/root/.ethereum'
+      - './geth/data/ethash/:/root/.ethash'
     ports:
       - '8545:8545'
       - '30303:30303'
       - '30303:30303/udp'
-    command: --identity "miner" --networkid 4002 --datadir data --port "30303" --rpc --rpcport "8545"  --rpcaddr="0.0.0.0" --rpcvhosts="*" --unlock 0,1,2,3,4  --password password.txt --ipcpath "~/.ethereum/geth.ipc" --rpccorsdomain "*" --rpcapi "db,eth,net,web3,personal" --mine --minerthreads=2
+    command: --identity "miner" --networkid 4002 --datadir data --port "30303" --rpc --rpcport "8545"  --rpcaddr="0.0.0.0" --rpcvhosts="*" --unlock 0,1,2,3,4  --password password.txt --ipcpath "~/.ethereum/geth.ipc" --rpccorsdomain "*" --rpcapi "db,eth,net,web3,personal" --mine --minerthreads=1
     depends_on:
       - 'dbcom'
       - 'tmplt'
