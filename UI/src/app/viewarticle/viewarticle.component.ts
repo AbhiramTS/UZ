@@ -103,7 +103,7 @@ export class ViewarticleComponent implements OnInit {
         opt = 1;   //upvote
         this.upVoted = "unfinishedUp";
       } 
-      const vote = this.web3.vote(true,this.artId,this.usr.userId.toString());
+      const vote = this.web3.vote(true,this.artId,this.usr.userId.toString(), opt);
 
       vote.on('transactionHash', async(th: string) => {
         console.log(th);
@@ -134,10 +134,10 @@ export class ViewarticleComponent implements OnInit {
         this.downVoted = "unfinishedDown";
       }
       else{
-        opt = 2;       //downvote
+        opt = 3;       //downvote
         this.downVoted = "unfinishedDown";
       }
-      const vote = this.web3.vote(false,this.artId,this.usr.userId.toString());
+      const vote = this.web3.vote(false,this.artId,this.usr.userId.toString(), opt);
 
       vote.on('transactionHash', async(th: string) => {
         console.log(th);

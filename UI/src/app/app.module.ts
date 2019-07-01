@@ -21,6 +21,8 @@ import { SafePipe } from './safe.pipe';
 import { ViewarticleComponent } from './viewarticle/viewarticle.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
+import { Globals } from './globals';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +47,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
   providers: [
     Web3ServiceService,
     AuthService,
-    TemplatingService
+    TemplatingService,
+    Globals
   ],
   bootstrap: [AppComponent]
 })

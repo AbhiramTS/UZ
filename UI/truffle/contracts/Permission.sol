@@ -6,6 +6,8 @@ contract Permission{
     mapping (address => bool) publisher;
     mapping (address => bool) article;
     mapping (address => bool) user;
+    mapping (string => bool) articleStash;                                          // [2.0] {check if article already registered}
+    
     function isNode( address _temp ) private view returns(bool _val) {
         _val = node[_temp];
     }
@@ -40,8 +42,10 @@ contract Permission{
     function addPublisher(address _temp) public onlyUser {  //unused
         publisher[_temp] = true;
     }
-    function addArticle(address _temp) public onlyUser {
+    function addArticle(address _temp, string memory _aHash) public onlyUser {
         article[_temp] = true;
+        articleStash[_aHash] = true;                                                // [2.0] {check if article already registered}
+        
     }
     function addUser(address _temp) public{
         user[_temp] = true;

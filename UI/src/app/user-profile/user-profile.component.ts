@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../services/auth.service';
 import { ArticleService } from '../services/article.service';
+import { Web3ServiceService } from '../services/web3-service.service';
 
 import { Article } from '../ngDBModels';
+import { User } from '../ngDBModels';
+
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,20 +16,49 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
 
+  private usr : User;
+  private msgOn = 0;
+  private donAmnt = "1";
+  profUsrAddr;
   newsStream;
-  constructor(private authService: AuthService, private articleService: ArticleService, private route: ActivatedRoute,) { 
-    this.usr = {name : 'Test', userId : 'testId', email : 'test@test.com', dob: new Date('01-01-1970'), gender: 'Male'};
+  constructor(
+    private authService: AuthService, 
+    private articleService: ArticleService, 
+    private route: ActivatedRoute, 
+    private web3Service: Web3ServiceService
+    ) { 
+    this.profUsr = {name : 'Test', userId : 'testId', email : 'test@test.com', dob: new Date('01-01-1970'), gender: 'Male'};
   }
 
-  usr;
+  profUsr;
   ngOnInit() {
-    this.authService.getProfile(this.route.snapshot.params.id).subscribe((usr)=>{
-      this.usr = usr;
+    this.usr = this.authService.getUserDetails();
+    this.authService.getProfile(this.route.snapshot.params.id).subscribe((profUsr)=>{
+      this.profUsrAddr = this.route.snapshot.params.id;
+      this.profUsr = profUsr;
     });
     this.articleService.getStream().subscribe((stream: Article[])=>{ //TODO: get articles of this user
     this.newsStream = stream;
     });
   }
+
+  // [2.0]
+
+  donate(){
+    if(parseInt(this.donAmnt) > 0){
+      this.web3Service.donate(this.usr.userId.toString(), this.profUsr.name, this.profUsrAddr, this.donAmnt);
+      console.log('Donation initiated. Call to web3Service');        
+    }
+    else{
+      alert("Value should be greater than 0");
+    }
+  }
+
+
+
+
+
+
 
   /*newsStream = [
     {

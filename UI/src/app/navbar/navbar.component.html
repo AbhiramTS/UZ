@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
     <a class="navbar-brand" routerLink="">Unmai Zeithi</a>
     <form class="form-inline">
       <input class="form-control mr-sm-2 navSrchBox" type="search" placeholder="Search" aria-label="Search">
@@ -10,21 +10,33 @@
       <li *ngIf="!this.authService.currentUserValue"><a routerLink="/login">Login</a></li>
       <li *ngIf="!this.authService.currentUserValue"><a routerLink="/register">Join Us</a></li>
       <li *ngIf="this.authService.currentUserValue" (click)="logout()"><a>Log Out</a></li>
-      
-      <!--
-      <li class="dropdown"><a routerLink="/newBill">Bill</a>
-        <div class="dropdown-content">
-          <a routerLink="/newBill">New Bill</a>
-          <a routerLink="/viewBills">View Bills</a>
-        </div>
-      </li>
-      <li class="dropdown"><a routerLink="/inventory">Inventory</a>
-        <div class="dropdown-content">
-          <a routerLink="/additem">Add Item</a>
-          <a routerLink="/">View Items</a>
-        </div>
-      </li>
-      -->
+      <li (click)="Notifier()"><a><i class="fa fas fa-list-ul"></i></a></li>
     </ul>
+
+    <div class="notifier" [style.right.px]="notifierPos">
+
+        <div *ngFor="let n of globals.Notifies" class="ntfCntnr" [ngStyle]="{'border-left-color':getColor(n.statCode)}">
+          <span class="ntfHdr">
+            <strong>{{n.msg}}</strong>
+          </span>
+          <span class="ntfBdy">
+            <details>
+              <summary>{{n.status}}</summary>
+              <ul *ngFor="let m of n.msgHist">
+                <li class="ntfMHist"><span [ngClass]="{
+                  'text-info':m.stat == 1,
+                  'text-success':m.stat == 2,
+                  'text-danger':m.stat == 3
+                }" >{{m.oldm}}.</span>     {{m.t | date: 'medium'}}</li>
+              </ul>   
+              <a target="_blank" href="#"> {{n.txHash}} </a>           
+            </details>
+          </span>
+          <span class="ntfTstmp">
+            {{n.time | date:'medium'}}
+          </span>
+        </div>
+
+    </div>
   
 </nav>

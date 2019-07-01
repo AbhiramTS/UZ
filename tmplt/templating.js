@@ -8,12 +8,13 @@ const getContent = async (url) => {
         request(url, (err, resp, html) => {
             if (!err && resp.statusCode == 200) {
                 const $ = cheerio.load(html);
+                console.log($.html().toString());
 
 
 
                 resolve(content = {
                     head: $('head').html(),
-                    content: $('.section-content').html()
+                    content: $('.section-content').html() // if else block here
                 });
             }
         });

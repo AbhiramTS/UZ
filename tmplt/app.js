@@ -10,9 +10,13 @@ fastify.register(require('fastify-cors'), {
   });
 
 fastify.get('/url', async (request, reply) => {
+    console.log("got request");
     const urlParts = url.parse(request.req.url, true);
     const params = urlParts.query;
     const link = params.link;
+
+    console.log("*************",link, "*********");
+
     const ct = await tmplt(link);
     const page = `
     <!DOCTYPE html>
@@ -21,6 +25,7 @@ fastify.get('/url', async (request, reply) => {
     <body>
     
         <div>${ct.content}</div>
+        <div>Test</div>
     
     </body>
     </html>`;

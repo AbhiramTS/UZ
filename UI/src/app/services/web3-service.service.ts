@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as web3 from 'web3';
 import {Subject} from 'rxjs';
-import { ContractJSON, Acnt, Article } from '../model'
+import { ContractJSON, Acnt, Article } from '../model';
 
 import { ArticleService } from './article.service';
+import { Globals } from '../globals';
 
 const Web3 = web3.default;
 
@@ -26,7 +27,7 @@ export class Web3ServiceService {
   public myAccounts: string[] = [];
   public myAccountsObservable = new Subject<String[]>();
   
-  constructor(private articleService: ArticleService) {
+  constructor(private articleService: ArticleService, private globals: Globals) {
     this.startWeb3();
    }
 
@@ -90,8 +91,58 @@ export class Web3ServiceService {
     });
   }
 
-  vote =  (vote: Boolean, artAddress: string, userAddress: string) => {
-    return this.UZ.methods.voteArticle(vote, artAddress).send({from: userAddress.toString(), gas: 6000000});
+  vote =  (vote: Boolean, artAddress: string, userAddress: string, voteUD: Number) => {
+    return this.UZ.methods.voteArticle(vote, artAddress).send({from: userAddress.toString(), gas: 6000000})
+    .on('transactionHash', async (tHash: string) => {
+      let vStat;
+      if(voteUD == 1 || voteUD == 5)vStat="Up";
+      else if(voteUD == 3 || voteUD == 6)vStat="Down";
+      else vStat = "Cancel ";
+      this.globals.Notifies.push(
+        {
+          time: String(Date.now()), 
+          status: "Tx. hash generated", 
+          statCode: 1, 
+          msg: vStat+"vote on article", 
+          txHash: tHash, 
+          msgHist: [{}]
+        });
+      console.log(tHash);
+    })
+    .on('receipt', async (tranReceipt) =>{
+      let t = this.globals.Notifies.findIndex(i=>i.txHash == tranReceipt.transactionHash);
+      this.globals.Notifies[t].msgHist.push({oldm: this.globals.Notifies[t].status, t: this.globals.Notifies[t].time, stat: this.globals.Notifies[t].statCode});
+      this.globals.Notifies[t].time = String(Date.now());
+      this.globals.Notifies[t].statCode = 2;
+      this.globals.Notifies[t].status = "Tx. receipt generated";
+      console.log(tranReceipt);
+      return true;
+    })
+    .on('error', (err)=>{
+
+      let t = this.globals.Notifies.findIndex(i=>i.txHash == err.transactionHash);
+      if(t){
+        this.globals.Notifies[t].msgHist.push({oldm: this.globals.Notifies[t].status, t: this.globals.Notifies[t].time, stat: this.globals.Notifies[t].statCode});
+        this.globals.Notifies[t].time = String(Date.now());
+        this.globals.Notifies[t].statCode = 3;
+        this.globals.Notifies[t].status = "Tx. failed";
+        console.log(err);
+        return false;
+      }
+      else{
+        this.globals.Notifies.push(
+          {
+            time: String(Date.now()), 
+            status: "Tx. failed", 
+            statCode: 3, 
+            msg: (vote==true)?"Up":"Down"+"Vote article", 
+            txHash: "---", 
+            msgHist: [{}]
+          });
+        console.log(err);
+        return false;
+      }
+    });
   }
 
   // vote = async (vote: Boolean, artAddress: string, userAddress: string) => {
@@ -140,4 +191,95 @@ export class Web3ServiceService {
     // });
   // }
 
+
+
+  // [2.0]
+
+
+  donate = async (userAddress: string, toName: String, toAddr: string, amnt:string) => {
+    let cnfrmd: boolean = false;
+    this.UZ.methods.donate(toAddr).send({from: userAddress, to: toAddr, gas: 6000000, value: this.myWeb3.utils.toWei(amnt, "ether")})
+      .on('transactionHash', async (tHash: string) => {
+        this.globals.Notifies.push(
+          {
+            time: String(Date.now()), 
+            status: "Tx. hash generated", 
+            statCode: 1, 
+            msg: "Donation to "+toName+" of "+amnt+" ether", 
+            txHash: tHash, 
+            msgHist: [{}]
+          });
+        console.log(tHash);
+      })
+      .on('receipt', async (tranReceipt) =>{
+        let t = this.globals.Notifies.findIndex(i=>i.txHash == tranReceipt.transactionHash);
+        this.globals.Notifies[t].msgHist.push({oldm: this.globals.Notifies[t].status, t: this.globals.Notifies[t].time, stat: this.globals.Notifies[t].statCode});
+        this.globals.Notifies[t].time = String(Date.now());
+        this.globals.Notifies[t].statCode = 2;
+        this.globals.Notifies[t].status = "Tx. receipt generated";
+        console.log(tranReceipt);
+        return true;
+      })
+      .on('error', (err)=>{
+
+        let t = this.globals.Notifies.findIndex(i=>i.txHash == err.transactionHash);
+        if(t){
+          this.globals.Notifies[t].msgHist.push({oldm: this.globals.Notifies[t].status, t: this.globals.Notifies[t].time, stat: this.globals.Notifies[t].statCode});
+          this.globals.Notifies[t].time = String(Date.now());
+          this.globals.Notifies[t].statCode = 3;
+          this.globals.Notifies[t].status = "Tx. failed";
+          console.log(err);
+          return false;
+        }
+        else{
+          this.globals.Notifies.push(
+            {
+              time: String(Date.now()), 
+              status: "Tx. failed", 
+              statCode: 3, 
+              msg: "Donation to "+toName+" of "+amnt+" ether", 
+              txHash: "---", 
+              msgHist: [{}]
+            });
+          console.log(err);
+          return false;
+        }
+      });
+    }
+
+    // .then((tx) => {
+    //   console.log(tx);
+    //   return true;
+    // }).catch((err)=>{
+    //   console.log(err);
+    //   return false;
+    // });
+
+
 }
+
+
+
+// tranReceipt = async (tranHash: String) : Promise<boolean> => {
+  //   try{
+  //     const tresp = await this.myWeb3.eth.getTransactionReceipt(tranHash, (e, data) => {
+  //       if (e !== null) {
+  //           console.log("Could not find a transaction for your id! ID you provided was " + tranHash);
+  //       } 
+  //       else {
+  //           console.log(data);
+  //           if(data.status == '0x0') {
+  //               console.log("The contract execution was not successful, check your transaction !");
+  //               return false;
+  //           } else {
+  //               console.log("Execution worked fine!");
+  //               return true;
+  //           }
+  //       }
+  //     });
+  //   }
+  //   catch(e){
+  //     console.log(e);
+  //     return false;
+  //   }
+  // }

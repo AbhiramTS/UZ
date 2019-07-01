@@ -301,3 +301,14 @@ export interface The4002 {
     address:         string;
     transactionHash: string;
 }
+
+// [2.0]
+
+export interface notifi {
+    time: String;
+    status: String;
+    statCode: Number;
+    msg: String;
+    txHash: String;
+    msgHist: [{}];
+}

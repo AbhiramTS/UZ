@@ -40,7 +40,7 @@ export class VoteComponent implements OnInit {
   }
 
   vote = () => {
-    this.contract.vote(this.userVote,this.article,this.user);
+    this.contract.vote(this.userVote,this.article,this.user,0);
     this.tVote++;
   }
 
